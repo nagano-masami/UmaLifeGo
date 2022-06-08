@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Chat from "@/components/Chat.vue";
-import MenuBar from "@/components/MenuBar.vue";
+import Chat from "../parts/Chat.vue";
+import MenuBar from "../globals/MenuBar.vue";
 
 export default {
   name: "ChatHome",

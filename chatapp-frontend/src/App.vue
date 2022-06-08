@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Login from "@/views/Login.vue";
-import Home from "@/views/Home.vue";
+import Login from "@/components/pages/Login.vue";
+import Home from "@/components/pages/Home.vue";
 import { mapState } from "vuex";
 
 export default {
