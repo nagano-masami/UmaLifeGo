@@ -87,8 +87,6 @@ export default {
         id: this.id,
         password: this.password
       }),
-      console.log(this.id);
-      console.log(this.password);
       //loadingの設定
       this.loading = true,
       this.loadLabel = "Now Loading",

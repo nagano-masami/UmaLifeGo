@@ -17,8 +17,6 @@ router.post('/', function (req, res, next) {
 
     connection.query(config.loginSQL, [id, password],
         function (error, results, fields) {
-            console.log(id);
-            console.log(password);
             console.log(results);
             if (results.length >= 1) {
                 res.send('OK');
