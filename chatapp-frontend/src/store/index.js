@@ -8,25 +8,26 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    userId: '',
+    id: '',
     password: ''
   },
+  getters: {},
   mutations: {
     login(state, param) {
       state.isLogin = true;
-      state.userId = param.userId;
+      state.id = param.id;
       state.password = param.password;
     },
     logout(state) {
       state.isLogin = false;
-      state.userId = '';
+      state.id = '';
       state.password = '';
     }
   },
   actions: {
-    async login({ commit }, { userId, password }) {
+    async login({ commit }, { id, password }) {
       const param = {
-        userId: userId,
+        id: id,
         password: password
       }
 

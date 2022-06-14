@@ -8,12 +8,23 @@
         class="headline font-italic font-weight-medium text--secondary"
       >
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-icon large>mdi-chat-processing-outline</v-icon>ChatApp
+          <v-icon large>mdi-chat-processing-outline</v-icon>CP_TOOL
         </v-col>
       </v-row>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-card class="elevation-12">
+          <v-card
+            class="elevation-12"
+            :loading="loading"
+            >
+            <template slot="progress">
+              <v-overlay absolute>
+                <div class="text-center py-12">
+                  <div class="headline">Now Loading...</div>
+                  <v-progress-circular :size="56" width="8" color="primary" indeterminate></v-progress-circular>
+                </div>
+              </v-overlay>
+            </template>
             <v-toolbar color="primary" dark flat>
               <v-toolbar-title>Login form</v-toolbar-title>
               <v-spacer></v-spacer>
@@ -21,11 +32,11 @@
             <v-card-text>
               <v-form>
                 <v-text-field
-                  label="UserId"
+                  label="ID"
                   name="login"
                   prepend-icon="mdi-account"
                   type="text"
-                  v-model="userId"
+                  v-model="id"
                 ></v-text-field>
 
                 <v-text-field
@@ -42,8 +53,12 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-row align="center" justify="space-around">
-                <v-btn color="#B2EBF2" @click="login">Login</v-btn>
+              <v-row>
+                <v-col>
+                  <div align="center">
+                    <v-btn color="#B2EBF2" @click="login" :disabled="loading" v-text="loadLabel"></v-btn>
+                  </div>
+                </v-col>
               </v-row>
             </v-card-actions>
           </v-card>
@@ -54,21 +69,33 @@
 </template>
 
 <script>
+//v-bindを「:」v-onを「@」v-slotを「#」で省略して記述することができます。
 export default {
-  name: "Login",
+  name: "login-system",
   components: {},
   data: () => ({
     showPassword: false,
-    userId: "",
+    id: "",
     password: "",
+    loading: false,
+    loadLabel: "LOGIN"
   }),
   methods: {
     login() {
       // 入力されたログイン情報が正しいか確認
       this.$store.dispatch("login", {
-        userId: this.userId,
-        password: this.password,
-      });
+        id: this.id,
+        password: this.password
+      }),
+      console.log(this.id);
+      console.log(this.password);
+      //loadingの設定
+      this.loading = true,
+      this.loadLabel = "Now Loading",
+      setTimeout(() => {
+        this.loading = false,
+        this.loadLabel = "LOGIN"
+      },5000)
     },
   },
 };

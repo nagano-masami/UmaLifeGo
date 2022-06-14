@@ -2,19 +2,19 @@
   <div>
       <menu-bar />
   <v-main>
-    <chat />
+    <user-chat />
   </v-main>
   </div>
 </template>
 
 <script>
-import Chat from "../parts/Chat.vue";
+import UserChat from "../parts/UserChat.vue";
 import MenuBar from "../globals/MenuBar.vue";
 
 export default {
   name: "ChatHome",
   components: {
-    Chat,
+    UserChat,
     MenuBar
   },
 };
