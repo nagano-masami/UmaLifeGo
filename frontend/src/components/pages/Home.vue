@@ -1,9 +1,9 @@
 <template>
   <div>
-      <menu-bar />
-  <v-main>
-    <user-chat />
-  </v-main>
+    <menu-bar />
+    <v-main>
+      <user-chat />
+    </v-main>
   </div>
 </template>
 

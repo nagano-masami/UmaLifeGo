@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12" style="height:80vh">
         <v-toolbar color="#BBDEFB" light>
-          <v-toolbar-title>Welcome CP_TOOL</v-toolbar-title>
+          <v-toolbar-title>Welcome Chat</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn @click="deleteRecord">Delete Old Chat</v-btn>
         </v-toolbar>
