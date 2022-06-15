@@ -7,13 +7,6 @@
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>
-      <!--v-btn>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-      <v-btn @click="logout">
-        <span class="mr-2">Logout</span>
-        <v-icon>mdi-home-export-outline</v-icon>
-      </v-btn-->
       <v-menu left bottom>
         <template v-slot:activator="{on,attrs}">
           <v-btn icon v-bind="attrs" v-on="on">
@@ -21,15 +14,11 @@
           </v-btn>
         </template>
         <v-list>
-          <!-- v-list-item v-for="n in 5" :key="n" @click="() => {}"-->
           <v-list-item>
             <v-list-item-title @click="logout">
               <v-icon>mdi-home-export-outline</v-icon>
               Logout
             </v-list-item-title>
-            <!--v-list-item-title>O</v-list-item-title>
-            <v-list-item-title>O</v-list-item-title>
-            <v-list-item-title>O</v-list-item-title-->
           </v-list-item>
         </v-list>
       </v-menu>
@@ -37,17 +26,18 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
         <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list-item>
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            :to="item.link"
+          >
             <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
+              <v-icon>{{item.icon}}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title>{{item.title}}</v-list-item-title>
+            </v-list-item-content>
+
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -56,17 +46,18 @@
 </template>
 
 <script>
-import UserChat from "../parts/UserChat.vue";
-
 export default {
   name: "MenuBar",
   data: () => ({
-    drawer: false,
-    group: null,
-  }),
-  components: {
-    UserChat,
-  },
+      drawer: false,
+      group: null,
+      items: [
+        {title: 'Top', icon: 'mdi-home', link: {name: 'Top'}},
+        //{title: 'Account', icon: 'mdi-account', link: {name: 'Account'}},
+        {title: 'Chat', icon: 'mdi-chat-processing-outline', link: {name: 'Chat'}},
+      ]
+      }),
+  components: {},
   methods: {
     logout() {
       // ログアウト処理実施

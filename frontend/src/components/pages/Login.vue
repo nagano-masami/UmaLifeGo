@@ -8,7 +8,7 @@
         class="headline font-italic font-weight-medium text--secondary"
       >
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-icon large>mdi-chat-processing-outline</v-icon>CP_TOOL
+          <v-icon large>mdi-file-document-multiple-outline</v-icon>CP_TOOL
         </v-col>
       </v-row>
       <v-row align="center" justify="center">

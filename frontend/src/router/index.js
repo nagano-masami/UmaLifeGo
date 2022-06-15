@@ -1,14 +1,35 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/pages/Login.vue'
+//import Login from '../components/pages/Login.vue'
+import Home from '../components/pages/Home.vue'
+import UserChat from "../components/parts/UserChat.vue";
+import TopPage from "../components/parts/TopPage.vue";
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
+//   {
+//     path: '/',
+//     name: 'Login',
+//     component: Login
+//   },
   {
-    path: '/',
-    name: 'Login',
-    component: Login
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    children: [
+      {
+        path: '/top',
+        name: 'Top',
+        component: TopPage
+      },
+      {
+        path: '/chat',
+        name: 'Chat',
+        component: UserChat
+      },
+
+    ]
   },
   // {
     // path: '/about',
