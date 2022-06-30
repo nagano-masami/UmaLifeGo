@@ -5,7 +5,9 @@
         <v-toolbar color="#BBDEFB" light>
           <v-toolbar-title>Welcome Chat</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn @click="deleteRecord">Delete Old Chat</v-btn>
+          <v-btn @click="deleteRecord">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
         </v-toolbar>
         <!-- v-card内チャットをスクロールさせるためにclass="overflow-y-auto"を指定 -->
         <v-card height="90%" width="100%" class="overflow-y-auto">
