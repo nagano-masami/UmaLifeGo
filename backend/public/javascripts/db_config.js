@@ -1,7 +1,7 @@
 exports.mysql_setting = {
     host: 'localhost',
     user: 'root',
-    password: 'masami14',
+    password: '',
     database: 'essp_db',
     timezone: 'jst'
 };

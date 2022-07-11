@@ -16,3 +16,5 @@ $ service mysql status<br>
 $ sudo mysql -u root -p<br>
   pw(s8799):nama1219<br>
   pw:masami14<br>
+$ mysql.server start
+$ mysql -u root -p
