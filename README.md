@@ -17,7 +17,7 @@ npm 8.11.0<br>
 vuex 2.x (3.xはvuetifyに対応していないため)<br>
 MySQL Ver 8.0.28-0ubuntu0.20.04.3 for Linux on x86_64 ((Ubuntu))<br>
 
-## :Library
+## :Library:技術詳細
 
 Vue.js<br>
     VueCLI…Vue.js向けのアプリケーション開発環境セットアップなどの機能を提供するCLIツール<br>
@@ -48,8 +48,15 @@ node https://github.com/TakayaTanuki/chatapp-backend
 | ---- | ---- |
 |  ログイン機能<br>  |  |
 |  チャット機能<br>  |  |
-|  |  |
-|  |  |
+|  データ管理機能<br>  |  |
+|  チャート表示機能<br>  |  |
+|  <br>  |  |
+|  <br>  |  |
+
+<br>
+
+## EWireFrame
+https://www.figma.com/files/project/61442384/Team-project?fuid=1129214728039177988
 
 <br>
 
