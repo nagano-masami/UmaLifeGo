@@ -7,6 +7,37 @@ http://localhost:3000/
 
 <br>
 
+## :four_leaf_clover: 機能一覧
+|  実装内容  |  追加説明  |
+| ---- | ---- |
+|  ログイン<br>  |  IDとパスワードによるログイン機能があること<br>  |
+|  チャット<br>  |  ユーザーが投稿、投稿の削除が可能なこと  |
+|  データ管理<br>  |  対象データの入力、編集、削除が可能なこと<br>  |
+|  チャート表示<br>  |  対象データをチャート表示できること<br>  |
+|  <br>  |  <br>  |
+
+<br>
+
+## EWireFrame
+https://www.figma.com/files/project/61442384/Team-project?fuid=1129214728039177988
+
+<br>
+
+## ER図
+CP_TOOL_WEB\backend\ERdiagram.drawio
+
+<br>
+
+## 追加を予定している機能
+|  実装内容  |  追加説明  |
+| ---- | ---- |
+|  ユーザ改廃<br>  |  ユーザーの照会、登録、更新、削除が可能なこと<br>  |
+|  権限管理<br>  |  一般ユーザーと管理者ユーザーなど権限の付与ができること<br>  |
+|  検索<br>  |  過去のデータを検索できること<br>  |
+|  表示選択<br>  |  表示内容の選択（データの絞り込み）が選べること<br>  |
+
+<br>
+
 ## :computer:使用技術
 
 WSL2<br>
@@ -41,34 +72,3 @@ https://qiita.com/tky_st/items/03faba81129e4877c3ea#%E6%AC%A1%E3%81%ABmysql%E3%8
 vue  https://github.com/TakayaTanuki/chatapp-frontend
 node https://github.com/TakayaTanuki/chatapp-backend
 
-<br>
-
-## :four_leaf_clover: 機能一覧
-|  実装内容  |  追加説明  |
-| ---- | ---- |
-|  ログイン機能<br>  |  |
-|  チャット機能<br>  |  |
-|  データ管理機能<br>  |  |
-|  チャート表示機能<br>  |  |
-|  <br>  |  |
-|  <br>  |  |
-
-<br>
-
-## EWireFrame
-https://www.figma.com/files/project/61442384/Team-project?fuid=1129214728039177988
-
-<br>
-
-## ER図
-CP_TOOL\backend\ERdiagram.png
-
-<br>
-
-## 追加を予定している機能
-ユーザ管理・権限<br>
-マスタ管理（顧客、装置、機器、協力会社、カテゴリ、適用法規、業種、工事名称、工事項目）<br>
-受領見積（結合、管理）<br>
-機器別工事項目（管理、年代別）<br>
-協力会社工事項目（管理）<br>
-星取表（管理）<br># CP_TOOL_WEB
