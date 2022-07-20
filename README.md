@@ -18,8 +18,8 @@ http://localhost:3000/
 
 <br>
 
-## EWireFrame
-https://www.figma.com/files/project/61442384/Team-project?fuid=1129214728039177988
+## WireFrame
+[Figmaへ](https://www.figma.com/files/project/61442384/Team-project?fuid=1129214728039177988)
 
 <br>
 
@@ -48,7 +48,7 @@ npm 8.11.0<br>
 vuex 2.x (3.xはvuetifyに対応していないため)<br>
 MySQL Ver 8.0.28-0ubuntu0.20.04.3 for Linux on x86_64 ((Ubuntu))<br>
 
-## :Library:技術詳細
+## 技術詳細
 
 Vue.js<br>
     VueCLI…Vue.js向けのアプリケーション開発環境セットアップなどの機能を提供するCLIツール<br>
@@ -63,12 +63,10 @@ Node.js<br>
 
 環境構築参考<br>
 
-Node.js を Linux 用 Windows サブシステム (WSL2) にインストールする<br>
-https://docs.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-wsl
+[Node.js を Linux 用 Windows サブシステム (WSL2) にインストールする](https://docs.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-wsl)
 
-Vue.js+Node.jsを利用したチャットアプリの作成<br>
-https://qiita.com/tky_st/items/03faba81129e4877c3ea#%E6%AC%A1%E3%81%ABmysql%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A%E3%82%92%E3%81%97%E3%81%A6%E3%81%8D%E3%81%BE%E3%81%99
+[Vue.js+Node.jsを利用したチャットアプリの作成](https://qiita.com/tky_st/items/03faba81129e4877c3ea#%E6%AC%A1%E3%81%ABmysql%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A%E3%82%92%E3%81%97%E3%81%A6%E3%81%8D%E3%81%BE%E3%81%99)
 <br>
-vue  https://github.com/TakayaTanuki/chatapp-frontend
-node https://github.com/TakayaTanuki/chatapp-backend
+[vue](https://github.com/TakayaTanuki/chatapp-frontend)
+[node](https://github.com/TakayaTanuki/chatapp-backend)
 
