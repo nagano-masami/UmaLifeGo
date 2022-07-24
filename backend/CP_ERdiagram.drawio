@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" pages="4">
-    <diagram id="r8BFkItVK0j7pZVwIh5z" name="Page-3">
-        <mxGraphModel dx="1523" dy="637" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <diagram id="r8BFkItVK0j7pZVwIh5z" name="ex">
+        <mxGraphModel dx="2827" dy="2247" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1241,8 +1241,8 @@
             </root>
         </mxGraphModel>
     </diagram>
-    <diagram id="4NbTvsE_JCKLIcSFcYBB" name="Page-4">
-        <mxGraphModel dx="696" dy="637" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <diagram id="4NbTvsE_JCKLIcSFcYBB" name="stock derby">
+        <mxGraphModel dx="600" dy="674" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
