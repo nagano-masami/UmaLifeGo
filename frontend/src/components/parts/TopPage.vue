@@ -2,6 +2,12 @@
   <v-container>
     <v-row class="text-center" style="height:80vh">
       <v-col cols="12">
+        <v-img v-bind:src="require('../../../public/img/t1.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/t2.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/t3.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/t4.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/t5.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/t6.png')"></v-img>
         <v-toolbar color="#BBDEFB" light>
           <v-toolbar-title>Top Page</v-toolbar-title>
           <v-spacer></v-spacer>
