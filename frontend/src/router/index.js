@@ -17,6 +17,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
+    meta: { title:'Stock Derby', desc: '競馬の家計簿'},
     children: [
       {
         path: '/top',

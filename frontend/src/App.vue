@@ -25,5 +25,32 @@ export default {
     */
     ...mapState(["isLogin"]),
   },
+  methods: {
+    createTitleDesc : function(routeInstance){
+      //titleを設定する処理
+      if(routeInstance.meta.title){
+        var setTitle = routeInstance.meta.title + 'Stock Derby';
+        document.title = setTitle;
+      }else{
+        document.title = 'Stock Derby subtitle'
+      }
+      //メタタグのdescription設定処理
+      if(routeInstance.meta.desc){
+        var setDesc = routeInstance.meta.desc + '競馬の家計簿';
+        document.querySelector("meta[name='description']").setAttribute('content', setDesc)
+      }else{
+        document.querySelector("meta[name='description']").setAttribute('content', 'subdescription')
+      }
+    }
+  },
+  mounted : function(){
+    var routeInstance = this.$route;
+    this.createTitleDesc(routeInstance);
+  },
+  watch: {
+    '$route' (routeInstance) {
+      this.createTitleDesc(routeInstance);
+    }
+  }
 };
 </script>

@@ -17,10 +17,10 @@
           </template>
         </v-toolbar>
         <!-- v-card内をスクロールさせるためにclass="overflow-y-auto"を指定 -->
-        <v-card height="100%" width="100%" class="overflow-y-auto">
+        <v-card height="10%" width="100%" class="overflow-y-auto">
+        </v-card>
         <v-img v-bind:src="require('../../../public/img/4.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/5.png')"></v-img>
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
