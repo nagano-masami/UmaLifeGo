@@ -5,7 +5,7 @@
         <v-img v-bind:src="require('../../../public/img/1.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/2.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/3.png')"></v-img>
-        <v-toolbar color="#BBDEFB" light>
+        <!--v-toolbar color="#BBDEFB" light>
           <v-toolbar-title>Top Page</v-toolbar-title>
           <v-spacer></v-spacer>
           <template v-slot:extension>
@@ -15,10 +15,10 @@
               <v-tab>Tab 3</v-tab>
             </v-tabs>
           </template>
-        </v-toolbar>
+        </v-toolbar-->
         <!-- v-card内をスクロールさせるためにclass="overflow-y-auto"を指定 -->
-        <v-card height="10%" width="100%" class="overflow-y-auto">
-        </v-card>
+        <!--v-card height="10%" width="100%" class="overflow-y-auto">
+        </v-card-->
         <v-img v-bind:src="require('../../../public/img/4.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/5.png')"></v-img>
       </v-col>

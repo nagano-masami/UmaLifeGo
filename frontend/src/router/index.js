@@ -22,12 +22,14 @@ const routes = [
       {
         path: '/top',
         name: 'Top',
-        component: TopPage
+        component: TopPage,
+        meta: { title:'トップページ', desc: 'Toppage'},
       },
       {
         path: '/chat',
         name: 'Chat',
-        component: UserChat
+        component: UserChat,
+        meta: { title:'ユーザチャット', desc: 'Userchat'},
       },
 
     ]

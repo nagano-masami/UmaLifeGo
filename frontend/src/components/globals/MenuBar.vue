@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="primary" dense dark>
+    <v-app-bar app color="#238842" dense dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>Stock Derby</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" absolute temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+        <v-list-item-group v-model="group" active-class="yellow--text text--accent-4">
           <v-list-item
             v-for="item in items"
             :key="item.title"
