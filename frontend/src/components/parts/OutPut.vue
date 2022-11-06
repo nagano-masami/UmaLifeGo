@@ -31,6 +31,7 @@ export default {
   methods: {   
     // datacollection(図形データ)とoptions(全体的なオプション)に中身を代入するメソッド。
     fillData() {
+      // mockデータを使い、のちにdbから取得したデータに変える予定
       this.datacollection = {
         // グラフの下に記載されるラベル
         labels: [2001,2002,2003,2004],
