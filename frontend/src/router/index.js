@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/pages/Home.vue'
 import UserChat from "../components/parts/UserChat.vue";
 import TopPage from "../components/parts/TopPage.vue";
+import OutPut from "../components/parts/OutPut.vue";
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
         name: 'Chat',
         component: UserChat
       },
+      {
+        path: '/output',
+        name: 'OutPut',
+        component: OutPut
+      }
 
     ]
   },

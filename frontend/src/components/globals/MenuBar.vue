@@ -58,6 +58,7 @@ export default {
         {title: 'Top', icon: 'mdi-home', link: {name: 'Top'}},
         //{title: 'Account', icon: 'mdi-account', link: {name: 'Account'}},
         {title: 'Chat', icon: 'mdi-chat-processing-outline', link: {name: 'Chat'}},
+        {title: 'OutPut', icon: 'mdi-database', link: {name: 'OutPut'}},
       ]
       }),
   components: {},
