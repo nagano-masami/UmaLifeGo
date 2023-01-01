@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/pages/Home.vue'
 import UserChat from "../components/parts/UserChat.vue";
 import TopPage from "../components/parts/TopPage.vue";
+import Input from "../components/parts/Input.vue";
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
         name: 'Chat',
         component: UserChat,
         meta: { title:'ユーザチャット', desc: 'Userchat'},
+      },
+      {
+        path: '/input',
+        name: 'Input',
+        component: Input,
+        meta: { title:'入力', desc: 'Input'},
       },
 
     ]

@@ -1,0 +1,52 @@
+<template>
+    <v-container>
+      <v-row class="text-center" style="height:80vh">
+        <v-col cols="12">
+          <v-toolbar dark flat color="#238842" light>
+            <v-toolbar-title>マークカード</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <template v-slot:extension>
+              <v-tabs v-model="tab" align-with-title>
+                <v-tabs-slider color="yellow"></v-tabs-slider>
+                <v-tab
+                v-for="item in items"
+                :key="item"
+                >
+                {{ item }}
+              </v-tab>
+            </v-tabs>
+            </template>
+          </v-toolbar>
+          <!-- v-card内をスクロールさせるためにclass="overflow-y-auto"を指定 -->
+          <v-tabs-items v-model="tab">
+            <v-tab-item
+            v-for="item in items"
+            :key="item"
+            >
+              <v-card flat>
+                <v-card-text v-text="text">
+                  
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs-items>
+          <!--v-card height="10%" width="100%" class="overflow-y-auto">
+          </v-card-->
+        </v-col>
+      </v-row>
+    </v-container>
+  </template>
+  
+  <script>
+    export default {
+      data () {
+        return {
+          tab: null,
+          items: [
+            '全て', 'ボックス', 'フォーメーション', '通常',
+          ],
+          text: 'ここから選択してください。',
+        }
+      },
+    }
+  </script>
