@@ -9,6 +9,34 @@
 
     <default-bar/>
 
+    <v-toolbar elevation="0">
+      <v-spacer></v-spacer>
+      <v-text-field
+        label="投資額"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show1 ? 'text' : 'password'"
+        @click:append="show1 = !show1"
+        value="123456789"
+        readonly
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-text-field
+        label="収支"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show2 ? 'text' : 'password'"
+        @click:append="show2 = !show2"
+        value="123456789"
+        readonly
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn-toggle color="primary" group>
+        <v-btn>
+          追加
+          <v-icon>mdi-content-save-plus</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+    </v-toolbar>
+
     <v-tabs
       v-model="tab"
       color="#238842"
@@ -22,21 +50,53 @@
 
     <v-tabs-items v-model="tab">
 
+      <v-tab-item>
+        <v-containar>
+          <v-row justify="center">
+            <history-card />
+          </v-row>
+        </v-containar>
+      </v-tab-item>
+      <v-tab-item>
+        <v-containar>
+          <v-row justify="center">
+            <history-card />
+          </v-row>
+        </v-containar>
+      </v-tab-item>
+      <v-tab-item>
+        <v-containar>
+          <v-row justify="center">
+            <history-card />
+          </v-row>
+        </v-containar>
+      </v-tab-item>
+      <v-tab-item>
+        <v-containar>
+          <v-row justify="center">
+            <history-card />
+          </v-row>
+        </v-containar>
+      </v-tab-item>
+
     </v-tabs-items>
   </v-card>
 </template>
 
 <script>
 import DefaultBar from "../globals/DefaultBar.vue";
+import HistoryCard from '../globals/HistoryCard.vue';
 
 export default {
     name: "History",
     data () {
       return {
+        tab: null,
       }
     },
     components: {
-      DefaultBar,
+        DefaultBar,
+        HistoryCard,
     }
   }
 </script>

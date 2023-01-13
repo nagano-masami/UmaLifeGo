@@ -8,37 +8,37 @@
 
     <default-bar />
     
-      <v-toolbar elevation="0">
-        <v-spacer></v-spacer>
-        <v-text-field
-          label="投資額"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="show1 ? 'text' : 'password'"
-          @click:append="show1 = !show1"
-          value="123456789"
-          readonly
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-text-field
-          label="収支"
-          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="show2 ? 'text' : 'password'"
-          @click:append="show2 = !show2"
-          value="123456789"
-          readonly
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-btn-toggle color="primary" group>
-          <v-btn>
-            保存
-            <v-icon>mdi-update</v-icon>
-          </v-btn>
-          <v-btn>
-            削除
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-        </v-btn-toggle>
-      </v-toolbar>
+    <v-toolbar elevation="0">
+      <v-spacer></v-spacer>
+      <v-text-field
+        label="投資額"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show1 ? 'text' : 'password'"
+        @click:append="show1 = !show1"
+        value="123456789"
+        readonly
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-text-field
+        label="収支"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show2 ? 'text' : 'password'"
+        @click:append="show2 = !show2"
+        value="123456789"
+        readonly
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn-toggle color="primary" group>
+        <v-btn>
+          保存
+          <v-icon>mdi-content-save-check</v-icon>
+        </v-btn>
+        <v-btn>
+          削除
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+    </v-toolbar>
 
     <v-tabs
       v-model="tab"
