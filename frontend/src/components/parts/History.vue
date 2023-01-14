@@ -31,6 +31,10 @@
       <v-spacer></v-spacer>
       <v-btn-toggle color="primary" group>
         <v-btn>
+          読込
+          <v-icon>mdi-reload</v-icon>
+        </v-btn>
+        <v-btn>
           追加
           <v-icon>mdi-content-save-plus</v-icon>
         </v-btn>
