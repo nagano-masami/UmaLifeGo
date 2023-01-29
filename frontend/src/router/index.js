@@ -45,9 +45,11 @@ const routes = [
         name: 'History',
         component: History,
         meta: { title:'過去記録', desc: 'History'},
+      },
+      {
         path: '/output',
         name: 'OutPut',
-        component: OutPut
+        component: OutPut,
       }
 
     ]
