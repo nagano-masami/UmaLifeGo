@@ -60,6 +60,7 @@ export default {
         {title: 'Chat', icon: 'mdi-chat-processing-outline', link: {name: 'Chat'}},
         {title: 'input', icon: 'mdi-widgets', link: {name: 'Input'}},
         {title: 'History', icon: 'mdi-history', link: {name: 'History'}},
+        {title: 'OutPut', icon: 'mdi-database', link: {name: 'OutPut'}},
       ]
       }),
   components: {},

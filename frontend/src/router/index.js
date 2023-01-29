@@ -6,6 +6,7 @@ import UserChat from "../components/parts/UserChat.vue";
 import TopPage from "../components/parts/TopPage.vue";
 import Input from "../components/parts/Input.vue";
 import History from "../components/parts/History.vue";
+import OutPut from "../components/parts/OutPut.vue";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,9 @@ const routes = [
         name: 'History',
         component: History,
         meta: { title:'過去記録', desc: 'History'},
+        path: '/output',
+        name: 'OutPut',
+        component: OutPut
       }
 
     ]
