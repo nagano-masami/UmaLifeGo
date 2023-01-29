@@ -1,23 +1,5 @@
 <template>
     <v-toolbar elevation="0">
-      
-      <v-combobox
-        :items="places"
-        editable
-        label="場名"
-        hide-details
-        class="pa-0"
-        overflow
-      ></v-combobox>
-    
-      <v-combobox
-        :items="race_no"
-        editable
-        label="レース番号"
-        hide-details
-        class="pa-0"
-        overflow
-      ></v-combobox>
 
       <v-col cols="12" sm="6" md="4">
         <v-menu
@@ -64,6 +46,25 @@
           </v-date-picker>
         </v-menu>
        </v-col>
+      
+      <v-combobox
+        :items="places"
+        editable
+        label="場名"
+        hide-details
+        class="pa-0"
+        overflow
+      ></v-combobox>
+    
+      <v-combobox
+        :items="race_no"
+        editable
+        label="レース番号"
+        hide-details
+        class="pa-0"
+        overflow
+      ></v-combobox>
+      
     </v-toolbar>
 </template>
 

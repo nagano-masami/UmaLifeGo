@@ -26,6 +26,7 @@
         <v-img v-bind:src="require('../../../public/img/13.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/14.png')"></v-img>
         <v-img v-bind:src="require('../../../public/img/15.png')"></v-img>
+        <v-img v-bind:src="require('../../../public/img/16.png')"></v-img>
       </v-col>
     </v-row>
   </v-container>
