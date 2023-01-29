@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="primary" dense dark>
+    <v-app-bar app color="#238842" dense dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>Stock Derby</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" absolute temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+        <v-list-item-group v-model="group" active-class="yellow--text text--accent-4">
           <v-list-item
             v-for="item in items"
             :key="item.title"
@@ -58,6 +58,8 @@ export default {
         {title: 'Top', icon: 'mdi-home', link: {name: 'Top'}},
         //{title: 'Account', icon: 'mdi-account', link: {name: 'Account'}},
         {title: 'Chat', icon: 'mdi-chat-processing-outline', link: {name: 'Chat'}},
+        {title: 'input', icon: 'mdi-widgets', link: {name: 'Input'}},
+        {title: 'History', icon: 'mdi-history', link: {name: 'History'}},
         {title: 'OutPut', icon: 'mdi-database', link: {name: 'OutPut'}},
       ]
       }),
