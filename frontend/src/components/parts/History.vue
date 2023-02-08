@@ -98,6 +98,15 @@ export default {
         tab: null,
       }
     },
+    methods: {
+      // Historyの読込処理
+
+      // 新しいCardの追加処理
+
+      // 既存のカードの編集処理
+
+      // 既存のカードの削除処理
+    },
     components: {
         DefaultBar,
         HistoryCard,

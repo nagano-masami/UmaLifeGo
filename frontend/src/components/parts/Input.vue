@@ -95,6 +95,11 @@
         show2: true,
       }
     },
+    methods: {
+      // Mark Cardの保存処理
+
+      // Mark Cardの削除処理（クリア）
+    },
     components: {
       DefaultCard,
       ChipGroup,
