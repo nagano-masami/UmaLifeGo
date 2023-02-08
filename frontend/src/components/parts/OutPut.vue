@@ -262,7 +262,7 @@ export default {
         datasets: [
           {
             // 背景色(オプション)
-            backgroundColor: ["#f87979"],
+            backgroundColor: ["#3F88C5"],
 
             // データ
             data: [-20, -30, 60, 50],
@@ -338,35 +338,11 @@ export default {
         maintainAspectRatio: false,
       };
     },
-    // async mounted() {
-    //   this.socket = io("localhost:3000");
-
-    //   // 初期表示時にDBのレコードを取得する
-    //   try {
-    //     const result = await axios.post("http://localhost:3000/getHistories");
-    //     if (result.data !== "NG") {
-    //       // 履歴の取得に成功した場合
-    //       this.messages = result.data;
-    //     } else {
-    //       // 履歴の取得に失敗した場合0
-    //       console.log("履歴の表示に失敗しました。");
-    //     }
-    //   } catch {
-    //     alert("処理に失敗しました。");
-    //   }
-
-    //   // 投稿されたデータの取得
-    //   this.socket.on("MESSAGE", (data) => {
-    //     this.messages = data;
-    //   });
-    // },
+    
   },
 };
 </script>
 <style>
-.right-input input {
-  text-align: center;
-}
 .icon {
   display: flex;
   flex-direction: column;
