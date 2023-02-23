@@ -2,7 +2,7 @@
   <div>
     <v-app-bar app color="#238842" dense dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>Stock Derby</v-toolbar-title>
+      <v-toolbar-title>Uma Life Go</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>

@@ -8,7 +8,7 @@
         class="headline font-italic font-weight-medium text--secondary"
       >
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-icon large>mdi-file-document-multiple-outline</v-icon>Stock Derby
+          <v-icon large>mdi-file-document-multiple-outline</v-icon>Uma Life Go
         </v-col>
       </v-row>
       <v-row align="center" justify="center">
