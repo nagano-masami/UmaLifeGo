@@ -8,6 +8,7 @@
             v-for="size in sizes"
             :key="size"
             :value="size"
+            style="color: var(--main-color); background-color: var(--back-color);"
         >
             {{ size }}
         </v-chip>

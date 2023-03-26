@@ -61,3 +61,7 @@ export default {
   }
 };
 </script>
+
+<style>
+@import "./store/mixins.css";
+</style>

@@ -1,7 +1,7 @@
 <template>
-  <v-card>
+  <v-card elevation="0">
     <v-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold">
+      <h1 class="font-weight-bold" style="color: var(--main-color)">
         Mark Card
       </h1>
     </v-card-title>
@@ -28,7 +28,7 @@
         readonly
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-btn-toggle color="primary" group>
+      <v-btn-toggle style="color: var(--main-color)" group>
         <v-btn>
           保存
           <v-icon>mdi-content-save-check</v-icon>
@@ -42,6 +42,7 @@
 
     <v-tabs
       v-model="tab"
+      background-color=""
       color="#238842"
       grow
     >

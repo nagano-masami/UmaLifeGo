@@ -31,14 +31,14 @@
             <v-spacer></v-spacer>
             <v-btn
               text
-              color="primary"
+              style="color: var(--main-color)"
               @click="menu = false"
             >
               Cancel
             </v-btn>
             <v-btn
               text
-              color="primary"
+              style="color: var(--main-color)"
               @click="$refs.menu.save(date)"
             >
               OK
