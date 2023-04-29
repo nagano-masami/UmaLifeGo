@@ -20,7 +20,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: { title:'Stock Derby', desc: '競馬の家計簿'},
+    meta: { title:'Uma Life Go', desc: '競馬の家計簿'},
     children: [
       {
         path: '/top',
@@ -50,6 +50,7 @@ const routes = [
         path: '/output',
         name: 'OutPut',
         component: OutPut,
+        meta: { title:'出力', desc: 'Output'},
       }
 
     ]

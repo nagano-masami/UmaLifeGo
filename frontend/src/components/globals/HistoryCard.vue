@@ -5,12 +5,11 @@
         :key="raceInfo.betting_ticket_id"
         elevation="5"
         outlined
+        color="#FFFDE7"
         >
-            <v-card-title 
-            v-text="raceInfo.ticket_selection_j_name"
-            ></v-card-title>
+            <v-card-title style="color: var(--main-color)">{{ raceInfo.ticket_selection_j_name }}</v-card-title>
 
-            <v-toolbar elevation="0">
+            <v-toolbar color="#FFFDE7" elevation="0">
                 <v-text-field
                     :label="card.label1"
                     :value="raceInfo.purchase_total_amount"
@@ -23,13 +22,13 @@
                     readonly
                 ></v-text-field>
             </v-toolbar>
-            <v-toolbar elevation="0">
+            <v-toolbar color="#FFFDE7" elevation="0">
                 <v-spacer></v-spacer>
-                <v-btn @click="edit(raceInfo)">
+                <v-btn dark style="background-color: var(--main-color)" @click="edit(raceInfo)">
                     編集
                     <v-icon>mdi-application-edit</v-icon>
                 </v-btn>
-                <v-btn @click="deletion(raceInfo)">
+                <v-btn dark style="background-color: var(--main-color)" @click="deletion(raceInfo)">
                     削除
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
