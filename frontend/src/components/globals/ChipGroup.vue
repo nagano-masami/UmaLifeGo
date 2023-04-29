@@ -11,6 +11,7 @@
             :key="size"
             :value="size"
             @input="updatedData"
+            style="color: var(--main-color); background-color: var(--back-color);"
         >
             {{ size }}
         </v-chip>

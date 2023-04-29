@@ -1,0 +1,11 @@
+:root {
+    --main-color: #238842;
+    --secondary-color: #FFEB3B;
+    --plus-color: #00C853;
+    --minus-color: #FFD600;
+    --back-color: #FFFDE7;
+  }
+
+/*
+style="color: var(--main-color)"
+*/
