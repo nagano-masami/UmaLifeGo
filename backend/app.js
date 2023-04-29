@@ -16,6 +16,7 @@ var loginRouter = require('./routes/login'); //追加
 var getHistoriesRouter = require('./routes/getHistories'); //追加
 var loadRaceInfoRouter = require('./routes/getRaceInfo'); //追加
 var getInitInfoRouter = require('./routes/getInitInfo'); //追加
+var deleteRaceInfoRouter = require('./routes/deleteRaceInfo'); //追加
 //expressモジュールをインスタンス化
 //appという変数名にするのが慣例
 var app = express();
@@ -55,8 +56,7 @@ app.use('/login', loginRouter);
 app.use('/getHistories', getHistoriesRouter);
 app.use('/getInitInfo', getInitInfoRouter);
 app.use('/getRaceInfo', loadRaceInfoRouter);
-
-
+app.use('/getRaceInfo', deleteRaceInfoRouter);
 
 
 // catch 404 and forward to error handler
