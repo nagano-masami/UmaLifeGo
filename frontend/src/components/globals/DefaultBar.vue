@@ -32,16 +32,15 @@
             <v-spacer></v-spacer>
             <v-btn
               text
-              style="color: var(--main-color)"
+              color="primary"
               @click="menu = false"
             >
               Cancel
             </v-btn>
             <v-btn
               text
+              color="primary"
               @click="$refs.menu.save(defaultBar.selectDate)"
-              style="color: var(--main-color)"
-
             >
               OK
             </v-btn>

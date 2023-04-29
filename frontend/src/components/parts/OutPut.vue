@@ -1,5 +1,31 @@
 <template>
   <v-container class="fill-height" fluid>
+    <v-row dense align="center" justify="center">
+      <v-col align="center">
+        <h1>OutPut</h1>
+      </v-col>
+    </v-row>
+    <v-row align="center" justify="center">
+      <v-col cols="12" sm="8" md="6" lg="4">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                label="総収支"
+                id="allExpenses"
+                name="allExpenses"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
+                v-model="allExpenses"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <v-row align="center" justify="center">
       <v-col cols="12">
         <BarChart
@@ -11,14 +37,55 @@
     </v-row>
 
     <v-row dense align="center" justify="space-between">
-      <v-col cols="4" offset="1" style="color: var(--main-color)">
-        <h1>Your Uma Life</h1>
+      <v-col cols="3" offset="1">
+        <h1>累計戦績</h1>
       </v-col>
     </v-row>
 
     <v-row dense align="center" justify="center">
       <v-col cols="2">
-        <v-card class="elevation-0">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="当年軍資金"
+                id="militaryFundsInYear"
+                name="militaryFundsInYear"
+                v-model="militaryFundsInYear"
+                readonly
+              >
+              </v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="1">
+        <div class="icon"><v-icon>mdi-gamepad-round</v-icon></div>
+      </v-col>
+      <v-col cols="2">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="当年損益"
+                id="profitAndLossInYear"
+                name="profitAndLossInYear"
+                v-model="profitAndLossInYear"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="1"
+        ><div class="icon">
+          <v-icon>mdi-drag-horizontal-variant</v-icon>
+        </div></v-col
+      >
+      <v-col cols="2">
+        <v-card class="elevation-12">
           <v-card-text>
             <v-form>
               <v-text-field
@@ -34,7 +101,7 @@
         </v-card>
       </v-col>
       <v-col cols="2">
-        <v-card class="elevation-0">
+        <v-card class="elevation-12">
           <v-card-text>
             <v-form>
               <v-text-field
@@ -51,35 +118,92 @@
       </v-col>
     </v-row>
 
-<!--     <v-row dense align="center" justify="space-between">
+    <v-row dense align="center" justify="space-between">
       <v-col cols="2" offset="1">
-        <v-select label="過去戦績(年)" :items="months"></v-select>
+        <v-select label="過去戦績(月)" :items="months"></v-select>
       </v-col>
-    </v-row> -->
+    </v-row>
 
     <v-row dense align="center" justify="center">
-      <v-data-table
-        :headers="tableheaders"
-        :items="tablevalue"
-        class="elevation-10"
+      <v-col cols="2">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="指定月軍資金"
+                id="militaryFundsInMonth"
+                name="militaryFundsInMonth"
+                v-model="militaryFundsInMonth"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="1"
+        ><div class="icon"><v-icon>mdi-gamepad-round</v-icon></div></v-col
       >
-          <template v-slot:[`item.kaisyuritu`]="{item}">
-            <v-chip
-              :color="getColor(item.kaisyuritu)"
-              dark
-            >
-              {{ item.kaisyuritu }}
-            </v-chip>
-
-          </template>
-      </v-data-table>
+      <v-col cols="2">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="指定月損益"
+                id="profitAndLossInMonth"
+                name="profitAndLossInMonth"
+                v-model="profitAndLossInMonth"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="1"
+        ><div class="icon">
+          <v-icon>mdi-drag-horizontal-variant</v-icon>
+        </div></v-col
+      >
+      <v-col cols="2">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="指定月収支"
+                id="balanceInMonth"
+                name="balanceInMonth"
+                v-model="balanceInMonth"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="2">
+        <v-card class="elevation-12">
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                reverse
+                label="指定月回収率"
+                id="recoveryRateInMonth"
+                name="recoveryRateInMonth"
+                v-model="recoveryRateInMonth"
+                readonly
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 // BarChart.jsでvue-chart.jsを読み込んでる。分けるのが公式の推奨らしい？
-import BarChart from "../../plugins/BarChart";
+import BarChart from "./BarChart.js";
 
 export default {
   name: "LineSample",
@@ -95,36 +219,27 @@ export default {
     // 全体的なオプション定義を入れる変数
     options: null,
     months: [
-      "1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月",
-    ],
-    tableheaders: [
-      {
-        text: '年',
-        align: 'center',
-        sortable: false,
-        value: 'year'
-      },
-      {
-        text: '収支（払戻額ー購入額：円）',
-        align: 'center',
-        sortable: false,
-        value: 'syushi'
-      },
-      {
-        text: '回収率（払戻額/購入額：％）',
-        align: 'center',
-        sortable: false,
-        value: 'kaisyuritu'}
-    ],
-    tablevalue: [
-      { year: '2023' , syushi: '123' , kaisyuritu: '345'},
-      { year: '2022' , syushi: '123' , kaisyuritu: '098'},
-      { year: '2021' , syushi: '123' , kaisyuritu: '123'},
-      { year: '2020' , syushi: '123' , kaisyuritu: '012'},
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
     ],
     showPassword: false,
+    allExpenses: "0000",
+    militaryFundsInYear: "0001",
+    profitAndLossInYear: "0002",
     balanceInYear: "0003",
     recoveryRateInYear: "0004",
+    militaryFundsInMonth: "0005",
+    profitAndLossInMonth: "0006",
     balanceInMonth: "0007",
     recoveryRateInMonth: "0008",
   }),
@@ -147,19 +262,19 @@ export default {
         datasets: [
           {
             // 背景色(オプション)
-            backgroundColor: [""],
+            backgroundColor: ["#3F88C5"],
 
             // データ
-            data: [-200, -300, 600, 500],
+            data: [-20, -30, 60, 50],
           },
         ],
       };
 
       for (var i = 0; i < this.datacollection.datasets[0].data.length; i++) {
         if (this.datacollection.datasets[0].data[i] > 0) {
-          this.datacollection.datasets[0].backgroundColor[i] = "#00C853"; // 値が正の場合は青
+          this.datacollection.datasets[0].backgroundColor[i] = "#3F88C5"; // 値が正の場合は青
         } else {
-          this.datacollection.datasets[0].backgroundColor[i] = "#FFD600"; // 値が負の場合は赤
+          this.datacollection.datasets[0].backgroundColor[i] = "#FF5E5B"; // 値が負の場合は赤
         }
       }
 
@@ -222,11 +337,6 @@ export default {
 
         maintainAspectRatio: false,
       };
-    },
-    getColor(kaisyuritu){
-      if (kaisyuritu > 100) return '#00C853'
-      else if (kaisyuritu < 100) return '#FFD600'
-      else return 'red'
     },
     
   },

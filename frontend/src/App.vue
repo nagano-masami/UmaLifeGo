@@ -32,10 +32,10 @@ export default {
     createTitleDesc : function(routeInstance){
       //titleを設定する処理
       if(routeInstance.meta.title){
-        var setTitle = routeInstance.meta.title + ' Uma Life Go';
+        var setTitle = routeInstance.meta.title + ' Stock Derby';
         document.title = setTitle;
       }else{
-        document.title = 'Uma Life Go'
+        document.title = 'Stock Derby'
       }
       //メタタグのdescription設定処理
       if(routeInstance.meta.desc){
@@ -61,7 +61,3 @@ export default {
   }
 };
 </script>
-
-<style>
-@import "./store/mixins.css";
-</style>

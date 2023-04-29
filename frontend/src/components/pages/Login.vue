@@ -8,7 +8,7 @@
         class="headline font-italic font-weight-medium text--secondary"
       >
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-icon large>mdi-horse-human</v-icon> Uma Life Go
+          <v-icon large>mdi-file-document-multiple-outline</v-icon>Stock Derby
         </v-col>
       </v-row>
       <v-row align="center" justify="center">
@@ -21,11 +21,11 @@
               <v-overlay absolute>
                 <div class="text-center py-12">
                   <div class="headline">Now Loading...</div>
-                  <v-progress-circular :size="56" width="8" style="color: var(--main-color)" indeterminate></v-progress-circular>
+                  <v-progress-circular :size="56" width="8" color="primary" indeterminate></v-progress-circular>
                 </div>
               </v-overlay>
             </template>
-            <v-toolbar style="background-color: var(--main-color)" flat dark>
+            <v-toolbar color="primary" dark flat>
               <v-toolbar-title>Login form</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
@@ -56,9 +56,7 @@
               <v-row>
                 <v-col>
                   <div align="center">
-                    <v-btn style="background-color: var(--main-color)" @click="login" :disabled="loading" dark>
-                      {{ loadLabel }}
-                    </v-btn>
+                    <v-btn color="#B2EBF2" @click="login" :disabled="loading" v-text="loadLabel"></v-btn>
                   </div>
                 </v-col>
               </v-row>

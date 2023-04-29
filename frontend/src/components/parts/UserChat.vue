@@ -2,11 +2,11 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12" style="height:80vh">
-        <v-toolbar style="color: var(--main-color)">
+        <v-toolbar dark color="#238842" light>
           <v-toolbar-title>Welcome Chat</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn dark style="background-color: var(--main-color)" @click="deleteRecord">
-            削除<v-icon>mdi-delete</v-icon>
+          <v-btn @click="deleteRecord">
+            <v-icon>mdi-delete</v-icon>
           </v-btn>
         </v-toolbar>
         <!-- v-card内チャットをスクロールさせるためにclass="overflow-y-auto"を指定 -->
@@ -18,15 +18,15 @@
                 <v-icon>mdi-account-circle</v-icon>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title>{{ message.user_id }}</v-list-item-title>
-                <v-list-item-subtitle>{{ message.message }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ message.create_date }}</v-list-item-subtitle>
+                <v-list-item-title v-text="message.user_id"></v-list-item-title>
+                <v-list-item-subtitle v-text="message.message"></v-list-item-subtitle>
+                <v-list-item-subtitle v-text="message.create_date"></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-divider inset v-if="messages.length > 0"></v-divider>
           </v-list>
         </v-card>
-        <v-card height="10%" width="100%" style="background-color: var(--main-color)" class="pa-sm-3 pa-lg-3 pa-md-4">
+        <v-card height="10%" width="100%" color="#B2DFDB" class="pa-sm-3 pa-lg-3 pa-md-4">
           <v-text-field
             v-model="message"
             solo

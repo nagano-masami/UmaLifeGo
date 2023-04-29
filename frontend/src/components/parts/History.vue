@@ -1,11 +1,11 @@
 <template>
 
-<v-card elevation="0">
-<!--     <v-card-title class="text-center justify-center py-6">
+<v-card>
+    <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold">
         過去記録
       </h1>
-    </v-card-title> -->
+    </v-card-title>
 
     <default-bar :defaultBar="defaultBar" @update-default-bar="updateDefaultBar"/>
 
@@ -29,7 +29,7 @@
         readonly
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-btn-toggle style="color: var(--main-color)" group>
+      <v-btn-toggle color="primary" group>
         <v-btn @click="loadRaceInfo">
           読込
           <v-icon>mdi-reload</v-icon>
