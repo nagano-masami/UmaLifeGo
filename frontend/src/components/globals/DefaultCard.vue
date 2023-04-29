@@ -11,6 +11,8 @@
             hide-details
             class="pa-0"
             overflow
+            v-model="defaultCard.selectFormula"
+            @input="updatedData"
         ></v-combobox>
         <v-combobox
             :items="amount"
@@ -19,6 +21,8 @@
             hide-details
             class="pa-0"
             overflow
+            v-model="defaultCard.selectAmount"
+            @input="updatedData"
         ></v-combobox>
         <v-combobox
             :items="unit"
@@ -27,6 +31,10 @@
             hide-details
             class="pa-0"
             overflow
+            v-model="defaultCard.selectUnit"
+            @input="updatedData"
+            item-value="digit"
+            
         ></v-combobox>
         </v-toolbar>
     </v-card>
@@ -34,11 +42,22 @@
 
 <script>
 export default {
+    props: ['defaultCard'],
+    methods: {
+        updatedData() {
+            this.$emit('update-default-card', this.defaultCard)
+        },
+    },
     data () {
         return {
             formula: ['枠連','馬連','馬単','ワイド','3連複','3連単'],
-            unit: ['万円','千円','百円'],
-            amount: [30,20,10,5,4,3,2,1]
+            unit: [
+                { text: '万円' , digit: 10000 },
+                { text: '千円', digit: 1000 },
+                { text: '百円', digit: 100 }
+            ],
+            amount: [30, 20, 10, 5, 4, 3, 2, 1],
+            
         }
     }
 }

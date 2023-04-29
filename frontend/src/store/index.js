@@ -9,7 +9,11 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     id: '',
-    password: ''
+    password: '',
+    selectDate:'',
+    selectPlace:'',
+    selectRace_no: '',
+    bettingTicketId:''
   },
   getters: {},
   mutations: {

@@ -6,7 +6,7 @@
       </h1>
     </v-card-title>
 
-    <default-bar />
+    <default-bar :defaultBar="defaultBar" @update-default-bar="updateDefaultBar"/>
     
     <v-toolbar elevation="0">
       <v-spacer></v-spacer>
@@ -15,7 +15,7 @@
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         @click:append="show1 = !show1"
-        value="123456789"
+        v-model="InvestmentAmount"
         readonly
       ></v-text-field>
       <v-spacer></v-spacer>
@@ -29,11 +29,11 @@
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn-toggle color="primary" group>
-        <v-btn>
+        <v-btn @click="save">
           保存
           <v-icon>mdi-content-save-check</v-icon>
         </v-btn>
-        <v-btn>
+        <v-btn @click="deletion">
           削除
           <v-icon>mdi-delete</v-icon>
         </v-btn>
@@ -45,38 +45,54 @@
       color="#238842"
       grow
     >
-      <v-tab> ボックス </v-tab>
-      <v-tab> フォーメーション </v-tab>
-      <v-tab> 通常 </v-tab>
+      <v-tab href="#tab-1" @click="InvestmentAmountCalculationInBox"> ボックス </v-tab>
+      <v-tab href="#tab-2" @click="InvestmentAmountCalculationInFormation"> フォーメーション </v-tab>
+      <v-tab href="#tab-3" @click="InvestmentAmountCalculationInNormal"> 通常 </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
 
-      <v-tab-item>
-        <default-card />
-        <chip-group />
+      <v-tab-item value="tab-1">
+        <default-card :defaultCard="boxDefaultCard" @update-default-card="updateBoxDefaultCard"/>
+        <chip-group :selectionNumber="boxSelection1" @update-chip-group="updateBoxSelection1"/>
       </v-tab-item>
 
-      <v-tab-item>
-        <default-card />
+      <v-tab-item value="tab-2">
+        <default-card :defaultCard="formationDefaultCard" @update-default-card="updateFormationDefaultCard"/>
         <v-card-text>1着目・1頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="formationSelection1" @update-chip-group="updateFormationSelection1"/>
         <v-card-text>2着目・2頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="formationSelection2" @update-chip-group="updateFormationSelection2"/>
         <v-card-text>3着目・3頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="formationSelection3" @update-chip-group="updateFormationSelection3"/>
       </v-tab-item>
 
-      <v-tab-item>
-        <default-card />
+      <v-tab-item value="tab-3">
+        <default-card :defaultCard="normalDefaultCard" @update-default-card="updateNormalDefaultCard"/>
         <v-card-text>1着目・1頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="normalSelection1" @update-chip-group="updateNormalSelection1"/>
         <v-card-text>2着目・2頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="normalSelection2" @update-chip-group="updateNormalSelection2"/>
         <v-card-text>3着目・3頭目</v-card-text>
-        <chip-group />
+        <chip-group :selectionNumber="normalSelection3" @update-chip-group="updateNormalSelection3"/>
       </v-tab-item>
     </v-tabs-items>
+    {{ defaultBar }}
+    {{ formationDefaultCard }}
+    {{ boxDefaultCard }}
+    {{ normalDefaultCard }}
+    {{ boxSelection1 }}
+    
+    {{ formationSelection1 }}
+    {{ formationSelection2 }}
+    {{ formationSelection3 }}
+    {{ normalSelection1 }}
+    {{ normalSelection2 }}
+    {{ normalSelection3 }}
+    {{ quinella }}
+    {{ exacta }}
+    {{ trio }}
+    {{ trifecta }}
   </v-card>
 
 </template>
@@ -93,12 +109,318 @@
         sizes: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18'],
         show1: true,
         show2: true,
+
+
+        defaultBar: {
+          selectDate:null,
+          selectPlace: null,
+          selectRace_no: null
+        },
+
+        InvestmentAmount: null,
+        
+        boxSelection1: [],
+        boxDefaultCard:{
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null}
+        },
+        
+        
+        formationSelection1:[],
+        formationSelection2:[],
+        formationSelection3: [],
+        formationDefaultCard:{
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null},
+        },
+          
+
+        
+        normalSelection1:[],
+        normalSelection2:[],
+        normalSelection3: [],
+        normalDefaultCard: {
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null},
+        },
+        
+
+
+
+        quinella:0,
+        exacta:0,
+        trio:0,
+        trifecta:0
+
+
       }
     },
-    methods: {
-      // Mark Cardの保存処理
+  methods: {
 
+    // 投資額計算処理ボックス
+    InvestmentAmountCalculationInBox: function () {
+      if (this.boxDefaultCard.selectFormula && this.boxDefaultCard.selectAmount && this.boxDefaultCard.selectUnit.digit && this.boxSelection1) {
+
+        var boxSelectionNum = this.boxSelection1.length;
+        var combinations = 0;
+        
+        if (this.boxDefaultCard.selectFormula == '枠連' || this.boxDefaultCard.selectFormula == '馬連' || this.boxDefaultCard.selectFormula  == 'ワイド') {
+          combinations = boxSelectionNum * (boxSelectionNum - 1) / 2;
+        }else if (this.boxDefaultCard.selectFormula  == '馬単') {
+          combinations = boxSelectionNum * (boxSelectionNum - 1);
+        }else if (this.boxDefaultCard.selectFormula  == '3連複') {
+          combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2) / 6;
+        }else if (this.boxDefaultCard.selectFormula  == '3連単') {
+          combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2);
+        }
+        
+        this.InvestmentAmount = combinations * this.boxDefaultCard.selectAmount * this.boxDefaultCard.selectUnit.digit;
+
+      } else {
+        this.InvestmentAmount = null;
+      }
+    },
+
+      // 投資額計算処理フォーメーション
+    InvestmentAmountCalculationInFormation: function () {
+     
+
+      if (this.formationDefaultCard.selectFormula && this.formationDefaultCard.selectAmount && this.formationDefaultCard.selectUnit.digit) {
+
+
+        var trifecta = 0;
+        var exacta = 0;
+        var quinella = 0;
+        var trio = 0;
+        var new_trio = 0;
+        var trio_sort = 0;
+        var trio_array = new Array(1);
+        var combinations = 0;
+
+        for (var i = 0; i < this.formationSelection1.length; i++) {
+
+          for (var j = 0; j < this.formationSelection2.length; j++) {
+            if (this.formationSelection1[i] != this.formationSelection2[j]) {
+              //馬単=1,2位の着順をあてるの
+              exacta++;
+
+              if (this.formationSelection1[i] < this.formationSelection2[j]) {
+                // 馬連=馬の組み合わせ。着順関係なし
+                quinella++;
+              }
+              // 1頭に2頭の番号がいるかチェック。いなければ入る。
+              else if (this.formationSelection1.indexOf(this.formationSelection2[j]) == -1) {
+                quinella++;
+              }
+              // 2頭に1頭の番号がいるかチェック。いなければ入る。
+              else if (this.formationSelection2.indexOf(this.formationSelection1[i]) == -1) {
+                quinella++;
+              }
+
+              for (var k = 0; k < this.formationSelection3.length; k++) {
+                if (this.formationSelection1[i] != this.formationSelection3[k]
+                  && this.formationSelection2[j] != this.formationSelection3[k]) {
+                  //３連単=着順もあてる
+                  trifecta++;
+
+
+                  trio_sort = new Array(this.formationSelection1[i], this.formationSelection2[j], this.formationSelection3[k]);
+                  trio_sort = trio_sort.sort();
+                  var trio_value = trio_sort[0] + trio_sort[1] + trio_sort[2];
+
+                  for (var l = 0; l < trio_array.length; l++) {
+                    if (trio_array[l] == trio_value) {
+                      new_trio++;
+                    }
+                  }
+
+                  if (!new_trio) {
+                    // ３連複=着順関係なし
+                    trio++;
+                    trio_array.push(trio_value);
+                  }
+                  new_trio = 0;
+                }
+              }
+            }
+          }
+
+        }
+
+        if (this.formationDefaultCard.selectFormula == '枠連') {
+          combinations = quinella
+        }else if (this.formationDefaultCard.selectFormula == '馬連') {
+          combinations = quinella
+        }else if (this.formationDefaultCard.selectFormula  == '馬単') {
+          combinations = exacta
+        }else if (this.formationDefaultCard.selectFormula  == 'ワイド') {
+          combinations = quinella
+        }else if (this.formationDefaultCard.selectFormula  == '3連複') {
+          combinations = trio
+        }else if (this.formationDefaultCard.selectFormula  == '3連単') {
+          combinations = trifecta
+        }
+
+        this.InvestmentAmount = combinations * this.formationDefaultCard.selectAmount * this.formationDefaultCard.selectUnit.digit;
+        this.quinella = quinella;
+        this.exacta = exacta;
+        this.trio = trio;
+        this.trifecta = trifecta;
+
+
+      } else {
+        this.InvestmentAmount = null;
+      }
+    },
+
+    // 投資額計算処理通常
+    InvestmentAmountCalculationInNormal: function () {
+      
+      if (this.normalDefaultCard.selectFormula && this.normalDefaultCard.selectAmount && this.normalDefaultCard.selectUnit.digit) {
+
+        var combinations = 0;
+        if ((this.normalDefaultCard.selectFormula == '枠連'
+          || this.normalDefaultCard.selectFormula == '馬連'
+          || this.normalDefaultCard.selectFormula == '馬単'
+          || this.normalDefaultCard.selectFormula == 'ワイド')
+          && this.normalSelection1[0]
+          && this.normalSelection2[0]
+          && this.normalSelection1[0] != this.normalSelection2[0]) {
+
+            combinations = 1;
+        } else if ((this.normalDefaultCard.selectFormula == '3連複'
+                  || this.normalDefaultCard.selectFormula == '3連単')
+                  && this.normalSelection1[0]
+                  && this.normalSelection2[0]
+                  && this.normalSelection3[0]
+                  && this.normalSelection1 !== this.normalSelection2
+                  && this.normalSelection2 !== this.normalSelection3
+                  && this.normalSelection2 !== this.normalSelection3) {
+
+            combinations = 1;
+          
+
+        } 
+
+
+        this.InvestmentAmount = combinations * this.normalDefaultCard.selectAmount * this.normalDefaultCard.selectUnit.digit;
+        
+      }else {
+        this.InvestmentAmount = null;
+      }
+      
+
+    },
+
+    updateDefaultBar(defaultBar) {
+      this.defaultBar = defaultBar;
+    },
+
+    updateBoxDefaultCard(defaultCard) {
+      this.boxDefaultCard = defaultCard;
+      this.InvestmentAmountCalculationInBox();
+    },
+    updateFormationDefaultCard(defaultCard) {
+      this.formationDefaultCard = defaultCard;
+      this.InvestmentAmountCalculationInFormation();
+    },
+    updateNormalDefaultCard(defaultCard) {
+      this.normalDefaultCard = defaultCard;
+      this.InvestmentAmountCalculationInNormal();
+    },
+
+    updateBoxSelection1(selectionNumber) {
+      this.boxSelection1 = selectionNumber;
+      this.InvestmentAmountCalculationInBox();
+    },
+    
+    updateFormationSelection1(selectionNumber) {
+      this.formationSelection1 = selectionNumber;
+      this.InvestmentAmountCalculationInFormation();
+    },
+    updateFormationSelection2(selectionNumber) {
+      this.formationSelection2 = selectionNumber;
+      this.InvestmentAmountCalculationInFormation();
+    },
+    updateFormationSelection3(selectionNumber) {
+      this.formationSelection3 = selectionNumber;
+      this.InvestmentAmountCalculationInFormation();
+    },
+
+    updateNormalSelection1(selectionNumber) {     
+      if (selectionNumber[0]) {
+        this.normalSelection1 = [selectionNumber.pop()];
+       
+      } else {
+        this.normalSelection1 = [];
+      }
+      this.InvestmentAmountCalculationInNormal();
+    },
+    updateNormalSelection2(selectionNumber) {
+      
+      if (selectionNumber[0]) {
+        this.normalSelection2 = [selectionNumber.pop()];
+       
+      } else {
+        this.normalSelection2 = [];
+      }
+      this.InvestmentAmountCalculationInNormal();
+    },
+    updateNormalSelection3(selectionNumber) {
+      if (selectionNumber[0]) {
+        this.normalSelection3 = [selectionNumber.pop()];
+       
+      } else {
+        this.normalSelection3 = [];
+      }
+      this.InvestmentAmountCalculationInNormal();
+    },
+
+      // Mark Cardの保存処理
+      save : function () {
+       
+      },
       // Mark Cardの削除処理（クリア）
+      deletion : function () {
+
+        if (this.tab == "tab-1") {
+          this.boxSelection1 = [],
+          this.boxDefaultCard = {
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null}
+          }
+        }
+        if (this.tab == "tab-2") {
+          this.formationSelection1=[],
+          this.formationSelection2=[],
+          this.formationSelection3=[],
+          this.formationDefaultCard={
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null},
+         }
+        }
+        if (this.tab == "tab-3") {
+          this.normalSelection1=[],
+          this.normalSelection2=[],
+          this.normalSelection3=[],
+          this.normalDefaultCard={
+          selectFormula: null,
+          selectAmount: null,
+          selectUnit: { text: null ,digit: null},
+          }
+        }
+        
+        this.quinella  = 0
+        this.exacta  = 0;
+        this.trio = 0;
+        this.trifecta = 0;
+
+}
     },
     components: {
       DefaultCard,
