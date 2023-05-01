@@ -14,9 +14,12 @@ var indexRouter = require('./routes/index');
 var deleteRouter = require('./routes/delete');
 var loginRouter = require('./routes/login'); //追加
 var getHistoriesRouter = require('./routes/getHistories'); //追加
-var loadRaceInfoRouter = require('./routes/getRaceInfo'); //追加
+var loadRaceInfosRouter = require('./routes/getRaceInfos'); //追加
 var getInitInfoRouter = require('./routes/getInitInfo'); //追加
 var deleteRaceInfoRouter = require('./routes/deleteRaceInfo'); //追加
+var getRaceInfoRouter = require('./routes/getRaceInfo'); //追加
+var saveRaceInfoRouter = require('./routes/saveRaceInfo'); //追加
+var getOutputInfoRouter = require('./routes/getOutputInfo'); //追加
 //expressモジュールをインスタンス化
 //appという変数名にするのが慣例
 var app = express();
@@ -55,9 +58,11 @@ app.use('/delete', deleteRouter);
 app.use('/login', loginRouter);
 app.use('/getHistories', getHistoriesRouter);
 app.use('/getInitInfo', getInitInfoRouter);
-app.use('/getRaceInfo', loadRaceInfoRouter);
-app.use('/getRaceInfo', deleteRaceInfoRouter);
-
+app.use('/getRaceInfos', loadRaceInfosRouter);
+app.use('/deleteRaceInfo', deleteRaceInfoRouter);
+app.use('/getRaceInfo', getRaceInfoRouter);
+app.use('/saveRaceInfo', saveRaceInfoRouter);
+app.use('/getOutputInfo', getOutputInfoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

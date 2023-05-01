@@ -80,7 +80,7 @@
 <script>
 // BarChart.jsでvue-chart.jsを読み込んでる。分けるのが公式の推奨らしい？
 import BarChart from "../../plugins/BarChart";
-
+import axios from "axios";
 export default {
   name: "LineSample",
   components: {
@@ -130,7 +130,26 @@ export default {
   }),
 
   // ロード時fillData()が実行される(mounted)
-  mounted() {
+  async mounted() {
+    // tablevalue
+    // balanceInYear
+    // datacollection
+    // recoveryRateInYear
+    const param = {
+          id: this.$store.state.id
+        };
+    try {
+            const result = await axios.post("http://localhost:3000/getOutputInfo",param);
+            if (result.data != "NG") {
+                // 保存に成功した場合履歴の初期化
+                  
+            } else {
+                // 削除に失敗した場合
+                console.log("削除に失敗しました。");
+            }
+        } catch {
+                alert("処理に失敗しました。");
+            }
     this.fillData();
     this.myStyles();
   },
@@ -230,6 +249,9 @@ export default {
     },
     
   },
+
+
+
 };
 </script>
 <style>

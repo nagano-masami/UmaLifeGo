@@ -13,7 +13,9 @@ export default new Vuex.Store({
     selectDate:'',
     selectPlace:'',
     selectRace_no: '',
-    bettingTicketId:''
+    bettingTicketId: '',
+    
+    loadRaceInfoInStoreFlag:false
   },
   getters: {},
   mutations: {
@@ -26,7 +28,35 @@ export default new Vuex.Store({
       state.isLogin = false;
       state.id = '';
       state.password = '';
+    },
+    setRaceinfos(state,param)
+    {
+      state.selectDate = param.selectDate;
+      state.selectPlace = param.selectPlace;
+      state.selectRace_no = param.selectRace_no;
+    },
+    deleteRaceinfos(state)
+    {
+      state.selectDate = '';
+      state.selectPlace = '';
+      state.selectRace_no = '';
+    },
+
+    setBettingTicketId(state,param) {
+      state.bettingTicketId = param;
+    },
+    deleteBettingTicketId(state) {
+      state.bettingTicketId = '';
+    },
+
+    loadRaceInfoInStore(state) {
+      state.loadRaceInfoInStoreFlag = true;
+    },
+    endLoadRaceInfoInStore(state) {
+      state.loadRaceInfoInStoreFlag = false;
     }
+    
+
   },
   actions: {
     async login({ commit }, { id, password }) {

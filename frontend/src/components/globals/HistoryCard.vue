@@ -7,7 +7,7 @@
         outlined
         color="#FFFDE7"
         >
-            <v-card-title style="color: var(--main-color)">{{ raceInfo.ticket_selection_j_name }}</v-card-title>
+            <v-card-title style="color: var(--main-color)">{{ raceInfo.ticket_class_j_name }}</v-card-title>
 
             <v-toolbar color="#FFFDE7" elevation="0">
                 <v-text-field
@@ -39,6 +39,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "HistoryCard",
   data: () => {
@@ -52,31 +53,37 @@ export default {
         ]
         }
     },
-    props: ['historyCard'],
+    props: ['historyCard','defaultBar'],
     methods: {
-        updatedData() {
-            this.$emit('update-history-card');
-        },
 
         edit(raceInfo) {
-            raceInfo.id;
 
+            this.$store.commit('setBettingTicketId', raceInfo.betting_ticket_id);
+            this.$emit('editClickAction');
+            this.$router.push('/input');
         },
 
         async deletion(raceInfo) {
+            
+            const param = {
+              betting_ticket_id: raceInfo.betting_ticket_id,
+              id:this.$store.state.id
+            };
 
         try {
-            const result = await axios.post("http://localhost:3000/deleteRaceInfo",raceInfo.betting_ticket_id);
+            const result = await axios.post("http://localhost:3000/deleteRaceInfo",param);
             if (result.data === "OK") {
-            // 削除に成功した場合履歴の初期化
-            this.messages = [];
+                // 削除に成功した場合履歴の初期化
+                
+                this.$emit('update-history-card');
             } else {
-            // 削除に失敗した場合
-            console.log("削除に失敗しました。");
+                // 削除に失敗した場合
+                console.log("削除に失敗しました。");
             }
         } catch {
-            alert("処理に失敗しました。");
-        }
+                alert("処理に失敗しました。");
+            }
+
         }
 
     }

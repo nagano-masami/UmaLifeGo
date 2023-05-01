@@ -27,12 +27,12 @@ router.post('/', (req, res, next) => {
               purchase_total_amount: 100,
               refund_amount: 10
           }];
-  res.send(raceInfo);
+  res.send("ok");
   // データベースの設定情報
   var connection = mysql.createConnection(config.mysql_setting);
 
   // // データを取り出す
-  // connection.query(config.getInitInfoSQL,[id], function (error, results, fields) {
+  // connection.query(config.getOutputInfoSQL,[id], function (error, results, fields) {
   //   // errorがnull、つまり成功した場合はOKを返す
   //     if (!error) {
          
