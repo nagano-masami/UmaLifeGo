@@ -115,11 +115,11 @@ export default {
         try {
           let result = await axios.post("http://localhost:3000/getRaceInfos", param);
           if (result.data !== "NG") {
-            // 履歴の取得に成功した場合
+            // historyの取得に成功した場合
             this.raceInfoDistinguish(result.data);
           } else {
-            // 履歴の取得に失敗した場合
-            console.log("履歴の表示に失敗しました。");
+            // historyの取得に失敗した場合
+            console.log("historyの表示に失敗しました。");
           }
         } catch {
           alert("処理に失敗しました。");
@@ -137,10 +137,10 @@ export default {
             this.raceInfoDistinguish(result.data);
           } else {
             // 履歴の取得に失敗した場合
-            console.log("履歴の表示に失敗しました。");
+            console.log("historyの初期表示に失敗しました。");
           }
         } catch {
-          alert("処理に失敗しました。");
+          alert("初期表示の取得処理に失敗しました。");
         }
 
       }

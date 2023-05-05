@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       tab: null,
-      ticket_class_j_nameTab:null,
+      ticket_class_j_nameTab: null,
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
       show2: true,
@@ -366,7 +366,7 @@ export default {
     },
 
     // Mark Cardの保存処理
-    save:async function () {
+    save: async function () {
       if (this.defaultBar.selectDate
         && this.defaultBar.selectPlace
         && this.defaultBar.selectRace_no
@@ -376,7 +376,7 @@ export default {
 
         const param = {
           id: this.$store.state.id,
-          bettingTicketId:null,
+          bettingTicketId: null,
           defaultBar: this.defaultBar,
           InvestmentAmount: this.InvestmentAmount,
           balance: this.balance,
@@ -439,23 +439,23 @@ export default {
         }
 
         try {
-            const result = await axios.post("http://localhost:3000/saveRaceInfo",param);
-            if (result.data === "OK") {
-                // 保存に成功した場合履歴の初期化
-                alert("正常に保存できました");
-                  this.deletion();
-              if (this.$store.state.bettingTicketId && this.tab == this.ticket_class_j_nameTab) {
-                this.$store.commit('deleteBettingTicketId');
-                this.$store.commit('loadRaceInfoInStore');
-                this.$router.push('/history');
-                }
-            } else {
-                // 削除に失敗した場合
-                console.log("削除に失敗しました。");
+          const result = await axios.post("http://localhost:3000/saveRaceInfo", param);
+          if (result.data === "OK") {
+            // 保存に成功した場合
+            alert("正常に保存できました");
+            this.deletion();
+            if (this.$store.state.bettingTicketId && this.tab == this.ticket_class_j_nameTab) {
+              this.$store.commit('deleteBettingTicketId');
+              this.$store.commit('loadRaceInfoInStore');
+              this.$router.push('/history');
             }
+          } else {
+            // 削除に失敗した場合
+            console.log("保存に失敗しました。");
+          }
         } catch {
-                alert("処理に失敗しました。");
-            }
+          alert("処理に失敗しました。");
+        }
       } else {
         alert("入力内容が不足している、あるいは誤りがあります。");
       }
@@ -515,7 +515,7 @@ export default {
         if (result.data !== 'NG') {
 
           let raceInfo = result.data[0];
-          // 履歴の取得に成功した場合
+          // 馬券情報の取得に成功した場合
           this.defaultBar.selectDate = raceInfo.race_date;
           this.defaultBar.selectPlace = raceInfo.race_track_j_name;
           this.defaultBar.selectRace_no = raceInfo.race_number;
@@ -587,11 +587,14 @@ export default {
 
           this.ticket_class_j_nameTab = this.tab;
         } else {
-          // 履歴の取得に失敗した場合
-          console.log("履歴の表示に失敗しました。");
+          // 馬券情報の取得に失敗した場合
+          console.log("馬券情報の表示に失敗しました。");
         }
       } catch {
-        alert("処理に失敗しました。");
+        alert("馬券情報取得処理に失敗しました。");
+        this.$store.commit('deleteBettingTicketId');
+        this.$store.commit('loadRaceInfoInStore');
+        this.$router.push('/history');
       }
     }
 

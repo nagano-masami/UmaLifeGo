@@ -73,8 +73,7 @@ export default {
         try {
             const result = await axios.post("http://localhost:3000/deleteRaceInfo",param);
             if (result.data === "OK") {
-                // 削除に成功した場合履歴の初期化
-                
+                // 削除に成功した場合             
                 this.$emit('update-history-card');
             } else {
                 // 削除に失敗した場合
