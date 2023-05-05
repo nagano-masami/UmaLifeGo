@@ -123,7 +123,8 @@ export default {
 
       } else {
         // Output情報取得に失敗した場合
-        console.log("Output情報表示に失敗しました。");
+        console.log("Output情報取得に失敗しました。");
+        alert("Output情報取得に失敗しました。");
       }
     } catch {
       alert("処理に失敗しました。");

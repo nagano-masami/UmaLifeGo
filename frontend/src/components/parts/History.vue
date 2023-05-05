@@ -119,7 +119,8 @@ export default {
             this.raceInfoDistinguish(result.data);
           } else {
             // historyの取得に失敗した場合
-            console.log("historyの表示に失敗しました。");
+            console.log("historyのデータ取得に失敗しました。");
+            alert("historyのデータ取得に失敗しました。");
           }
         } catch {
           alert("処理に失敗しました。");
@@ -137,7 +138,8 @@ export default {
             this.raceInfoDistinguish(result.data);
           } else {
             // 履歴の取得に失敗した場合
-            console.log("historyの初期表示に失敗しました。");
+            console.log("historyの初期表示データの取得に失敗しました。");
+            alert("historyの初期表示データの取得に失敗しました。");
           }
         } catch {
           alert("初期表示の取得処理に失敗しました。");

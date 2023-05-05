@@ -78,6 +78,7 @@ export default {
             } else {
                 // 削除に失敗した場合
                 console.log("削除に失敗しました。");
+                alert("削除に失敗しました。");
             }
         } catch {
                 alert("処理に失敗しました。");

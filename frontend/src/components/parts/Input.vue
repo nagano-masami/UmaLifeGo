@@ -91,6 +91,7 @@ export default {
     return {
       tab: null,
       ticket_class_j_nameTab: null,
+      bettingTicketId:null,
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
       show2: true,
@@ -282,9 +283,9 @@ export default {
           && this.normalSelection1[0]
           && this.normalSelection2[0]
           && this.normalSelection3[0]
-          && this.normalSelection1 !== this.normalSelection2
-          && this.normalSelection2 !== this.normalSelection3
-          && this.normalSelection2 !== this.normalSelection3) {
+          && this.normalSelection1[0] != this.normalSelection2[0]
+          && this.normalSelection2[0] != this.normalSelection3[0]
+          && this.normalSelection1[0] != this.normalSelection3[0]) {
 
           combinations = 1;
 
@@ -435,7 +436,7 @@ export default {
         }
 
         if (this.tab == this.ticket_class_j_nameTab) {
-          param.bettingTicketId = this.$store.state.bettingTicketId;
+          param.bettingTicketId = this.bettingTicketId;
         }
 
         try {
@@ -444,14 +445,14 @@ export default {
             // 保存に成功した場合
             alert("正常に保存できました");
             this.deletion();
-            if (this.$store.state.bettingTicketId && this.tab == this.ticket_class_j_nameTab) {
-              this.$store.commit('deleteBettingTicketId');
+            if (this.bettingTicketId && this.tab == this.ticket_class_j_nameTab) {
               this.$store.commit('loadRaceInfoInStore');
               this.$router.push('/history');
             }
           } else {
             // 削除に失敗した場合
             console.log("保存に失敗しました。");
+            alert("保存に失敗しました。");
           }
         } catch {
           alert("処理に失敗しました。");
@@ -586,9 +587,12 @@ export default {
           }
 
           this.ticket_class_j_nameTab = this.tab;
+          this.bettingTicketId = this.$store.state.bettingTicketId;
+          this.$store.commit('deleteBettingTicketId');
         } else {
           // 馬券情報の取得に失敗した場合
-          console.log("馬券情報の表示に失敗しました。");
+          console.log("馬券情報の取得に失敗しました。");
+          alert("馬券情報の取得に失敗しました。");
         }
       } catch {
         alert("馬券情報取得処理に失敗しました。");
