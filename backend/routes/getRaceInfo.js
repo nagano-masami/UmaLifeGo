@@ -34,14 +34,15 @@ router.post('/', (req, res, next) => {
     res.send(raceInfo);
 
     // // データを取り出す
-    // connection.query(config.getRaceInfosSQL, [id,bettingTicketId],function (error, results, fields) {
-    //   // errorがnull、つまり成功した場合はOKを返す
-    //   if (!error) {
+    // connection.query(config.getRaceInfosSQL, [id, bettingTicketId], function (error, results, fields) {
+    //     // errorがnull、つまり成功した場合はOKを返す
+    //     if (!error) {
 
-    //     res.send(results);
-    //   } else {
-    //     res.send('NG');
-    //   }
+    //         res.send(results);
+    //     } else {
+    //         res.send('NG');
+    //         console.error(error);
+    //     }
     // }
     // );
 });
