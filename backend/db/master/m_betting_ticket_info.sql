@@ -1,0 +1,21 @@
+CREATE TABLE m_betting_ticket_info (
+ user_id                VARCHAR(100) NOT NULL,
+ betting_ticket_id      VARCHAR(25) NOT NULL,
+ betting_ticket_j_name  VARCHAR(80) NOT NULL,
+ betting_ticket_e_name  VARCHAR(80),
+ race_date              DATE NOT NULL,
+ race_track_id          CHAR(3) NOT NULL,
+ race_number            INT NOT NULL,
+ ticket_category_id     CHAR(3) NOT NULL,
+ ticket_selection_id    CHAR(3) NOT NULL,
+ registration_date      DATETIME,
+ update_date            DATETIME,
+ sort_number            INT,
+ outline                VARCHAR(80),
+ PRIMARY KEY (user_id, betting_ticket_id),
+ INDEX betting_ticket_id_indx(betting_ticket_id),
+ FOREIGN KEY (user_id) REFERENCES USERS (id) ON UPDATE CASCADE,
+ FOREIGN KEY (race_track_id) REFERENCES d_racing_course (id) ON UPDATE CASCADE,
+ FOREIGN KEY (ticket_category_id) REFERENCES d_ticket_category (id) ON UPDATE CASCADE,
+ FOREIGN KEY (ticket_selection_id) REFERENCES d_ticket_selections (id) ON UPDATE CASCADE
+ );
