@@ -21,8 +21,8 @@
           保存
           <v-icon>mdi-content-save-check</v-icon>
         </v-btn>
-        <v-btn @click="deletion">
-          削除
+        <v-btn @click="cancel">
+          キャンセル
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </v-btn-toggle>
@@ -439,11 +439,7 @@ export default {
           if (result.data === "OK") {
             // 保存に成功した場合
             alert("正常に保存できました");
-            this.deletion();
-            if (this.bettingTicketId) {
-              this.$store.commit('loadRaceInfoInStore');
-              this.$router.push('/history');
-            }
+            this.cancel();
           } else {
             // 削除に失敗した場合
             console.log("保存に失敗しました。");
@@ -457,7 +453,12 @@ export default {
       }
     },
     // Mark Cardの削除処理（クリア）
-    deletion: function () {
+    cancel: function () {
+
+       if (this.bettingTicketId) {
+              this.$store.commit('loadRaceInfoInStore');
+              this.$router.push('/history');
+            }
 
       this.balance = null;
       if (this.tab == "tab-1") {
