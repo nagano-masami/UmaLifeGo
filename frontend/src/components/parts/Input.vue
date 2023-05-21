@@ -90,7 +90,6 @@ export default {
   data() {
     return {
       tab: null,
-      ticket_class_j_nameTab: null,
       bettingTicketId:null,
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
@@ -377,7 +376,7 @@ export default {
 
         const param = {
           id: this.$store.state.id,
-          bettingTicketId: null,
+          bettingTicketId: this.bettingTicketId,
           defaultBar: this.defaultBar,
           InvestmentAmount: this.InvestmentAmount,
           balance: this.balance,
@@ -435,17 +434,13 @@ export default {
           param.selectUnitDigit = this.normalDefaultCard.selectUnit.digit;
         }
 
-        if (this.tab == this.ticket_class_j_nameTab) {
-          param.bettingTicketId = this.bettingTicketId;
-        }
-
         try {
           const result = await axios.post("http://localhost:3000/saveRaceInfo", param);
           if (result.data === "OK") {
             // 保存に成功した場合
             alert("正常に保存できました");
             this.deletion();
-            if (this.bettingTicketId && this.tab == this.ticket_class_j_nameTab) {
+            if (this.bettingTicketId) {
               this.$store.commit('loadRaceInfoInStore');
               this.$router.push('/history');
             }
@@ -586,7 +581,6 @@ export default {
 
           }
 
-          this.ticket_class_j_nameTab = this.tab;
           this.bettingTicketId = this.$store.state.bettingTicketId;
           this.$store.commit('deleteBettingTicketId');
         } else {
