@@ -2,7 +2,7 @@
     <v-card
         flat
     >
-        <v-card-text>ここから選択してください。</v-card-text>
+        <v-card-text>ここから選択してください。また選択してるタブのものしか保存されません</v-card-text>
         <v-toolbar elevation="0">
         <v-combobox
             :items="formula"
