@@ -190,7 +190,7 @@ export default {
         var new_trio = 0;
         var trio_sort = 0;
         var trio_array = new Array(1);
-        var combinations = 0;
+        var combinations = null;
 
         for (var i = 0; i < this.formationSelection1.length; i++) {
 
@@ -256,7 +256,11 @@ export default {
           combinations = trifecta
         }
 
-        this.InvestmentAmount = combinations * this.formationDefaultCard.selectAmount * this.formationDefaultCard.selectUnit.digit;
+        if (combinations != 0) {
+          this.InvestmentAmount = combinations * this.formationDefaultCard.selectAmount * this.formationDefaultCard.selectUnit.digit;
+        } else {
+          this.InvestmentAmount = null;
+        }
         this.quinella = quinella;
         this.exacta = exacta;
         this.trio = trio;
@@ -274,7 +278,12 @@ export default {
       if (this.normalDefaultCard.selectFormula && this.normalDefaultCard.selectAmount && this.normalDefaultCard.selectUnit.digit) {
 
         var combinations = 0;
-        if ((this.normalDefaultCard.selectFormula == '枠連'
+        if ((this.normalDefaultCard.selectFormula == '単勝'
+          || this.normalDefaultCard.selectFormula == '複勝')
+          && this.normalSelection1[0]) {
+            combinations = 1;
+
+        } else if ((this.normalDefaultCard.selectFormula == '枠連'
           || this.normalDefaultCard.selectFormula == '馬連'
           || this.normalDefaultCard.selectFormula == '馬単'
           || this.normalDefaultCard.selectFormula == 'ワイド')
@@ -298,7 +307,11 @@ export default {
         }
 
 
-        this.InvestmentAmount = combinations * this.normalDefaultCard.selectAmount * this.normalDefaultCard.selectUnit.digit;
+        if (combinations != 0) {
+          this.InvestmentAmount = combinations * this.normalDefaultCard.selectAmount * this.normalDefaultCard.selectUnit.digit;
+        }else {
+          this.InvestmentAmount = null;
+        }
 
       } else {
         this.InvestmentAmount = null;
