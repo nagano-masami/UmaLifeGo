@@ -62,7 +62,7 @@ export default {
       ],
     };
   },
-  props: ["historyCard", "defaultBar"],
+  props: ["historyCard"],
   methods: {
     edit(raceInfo) {
       this.$store.commit("setBettingTicketId", raceInfo.betting_ticket_id);

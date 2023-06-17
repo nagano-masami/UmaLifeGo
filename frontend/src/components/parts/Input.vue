@@ -37,28 +37,31 @@
     <v-tabs-items v-model="tab">
 
       <v-tab-item value="tab-1">
-        <default-card :defaultCard="boxDefaultCard" @update-default-card="updateBoxDefaultCard" />
+        <default-card :defaultCard="boxDefaultCard" :inputFormula="formula" @update-default-card="updateBoxDefaultCard" />
         <chip-group :selectionNumber="boxSelection1" @update-chip-group="updateBoxSelection1" />
       </v-tab-item>
 
       <v-tab-item value="tab-2">
-        <default-card :defaultCard="formationDefaultCard" @update-default-card="updateFormationDefaultCard" />
+        <default-card :defaultCard="formationDefaultCard" :inputFormula="formula" @update-default-card="updateFormationDefaultCard" />
         <v-card-text>1着目・1頭目</v-card-text>
         <chip-group :selectionNumber="formationSelection1" @update-chip-group="updateFormationSelection1" />
         <v-card-text>2着目・2頭目</v-card-text>
         <chip-group :selectionNumber="formationSelection2" @update-chip-group="updateFormationSelection2" />
-        <v-card-text>3着目・3頭目</v-card-text>
-        <chip-group :selectionNumber="formationSelection3" @update-chip-group="updateFormationSelection3" />
+        <v-card-text v-if="formationSelection3Show">3着目・3頭目</v-card-text>
+        <chip-group v-if="formationSelection3Show" :selectionNumber="formationSelection3"
+          @update-chip-group="updateFormationSelection3" />
       </v-tab-item>
 
       <v-tab-item value="tab-3">
-        <default-card :defaultCard="normalDefaultCard" @update-default-card="updateNormalDefaultCard" />
+        <default-card :defaultCard="normalDefaultCard" :inputFormula="nomalFormula" @update-default-card="updateNormalDefaultCard" />
         <v-card-text>1着目・1頭目</v-card-text>
         <chip-group :selectionNumber="normalSelection1" @update-chip-group="updateNormalSelection1" />
-        <v-card-text>2着目・2頭目</v-card-text>
-        <chip-group :selectionNumber="normalSelection2" @update-chip-group="updateNormalSelection2" />
-        <v-card-text>3着目・3頭目</v-card-text>
-        <chip-group :selectionNumber="normalSelection3" @update-chip-group="updateNormalSelection3" />
+        <v-card-text v-if="normalSelection2Show">2着目・2頭目</v-card-text>
+        <chip-group v-if="normalSelection2Show" :selectionNumber="normalSelection2"
+          @update-chip-group="updateNormalSelection2" />
+        <v-card-text v-if="normalSelection3Show">3着目・3頭目</v-card-text>
+        <chip-group v-if="normalSelection3Show" :selectionNumber="normalSelection3"
+          @update-chip-group="updateNormalSelection3" />
       </v-tab-item>
     </v-tabs-items>
     {{ defaultBar }}
@@ -90,11 +93,12 @@ export default {
   data() {
     return {
       tab: null,
-      bettingTicketId:null,
+      bettingTicketId: null,
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
       show2: true,
-
+      formula: ['枠連', '馬連', '馬単', 'ワイド', '3連複', '3連単'],
+      nomalFormula: ['単勝','複勝','枠連','馬連','馬単','ワイド','3連複','3連単'],
 
       defaultBar: {
         selectDate: null,
@@ -121,6 +125,7 @@ export default {
         selectAmount: null,
         selectUnit: { text: null, digit: null },
       },
+      formationSelection3Show: true,
 
 
 
@@ -132,6 +137,8 @@ export default {
         selectAmount: null,
         selectUnit: { text: null, digit: null },
       },
+      normalSelection2Show: true,
+      normalSelection3Show: true,
 
 
 
@@ -145,7 +152,6 @@ export default {
     }
   },
   methods: {
-
     // 投資額計算処理ボックス
     InvestmentAmountCalculationInBox: function () {
       if (this.boxDefaultCard.selectFormula && this.boxDefaultCard.selectAmount && this.boxDefaultCard.selectUnit.digit && this.boxSelection1) {
@@ -312,10 +318,12 @@ export default {
     updateFormationDefaultCard(defaultCard) {
       this.formationDefaultCard = defaultCard;
       this.InvestmentAmountCalculationInFormation();
+      this.formationSelectionShow();
     },
     updateNormalDefaultCard(defaultCard) {
       this.normalDefaultCard = defaultCard;
       this.InvestmentAmountCalculationInNormal();
+      this.normalSelectionShow();
     },
 
     updateBoxSelection1(selectionNumber) {
@@ -386,7 +394,8 @@ export default {
           selectFormula: null,
           selectAmount: null,
           selectUnitText: null,
-          selectUnitDigit: null
+          selectUnitDigit: null,
+          ticket_class_j_name: null
         };
 
         if (this.tab == "tab-1") {
@@ -396,6 +405,7 @@ export default {
           param.selectAmount = this.boxDefaultCard.selectAmount;
           param.selectUnitText = this.boxDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.boxDefaultCard.selectUnit.digit;
+          param.ticket_class_j_name = "ボックス";
         }
         if (this.tab == "tab-2") {
 
@@ -414,6 +424,7 @@ export default {
           param.selectAmount = this.formationDefaultCard.selectAmount;
           param.selectUnitText = this.formationDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.formationDefaultCard.selectUnit.digit;
+          param.ticket_class_j_name = "フォーメーション";
         }
         if (this.tab == "tab-3") {
 
@@ -432,6 +443,7 @@ export default {
           param.selectAmount = this.normalDefaultCard.selectAmount;
           param.selectUnitText = this.normalDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.normalDefaultCard.selectUnit.digit;
+          param.ticket_class_j_name = "通常";
         }
 
         try {
@@ -455,10 +467,10 @@ export default {
     // Mark Cardの削除処理（クリア）
     cancel: function () {
 
-       if (this.bettingTicketId) {
-              this.$store.commit('loadRaceInfoInStore');
-              this.$router.push('/history');
-            }
+      if (this.bettingTicketId) {
+        this.$store.commit('loadRaceInfoInStore');
+        this.$router.push('/history');
+      }
 
       this.balance = null;
       if (this.tab == "tab-1") {
@@ -496,8 +508,40 @@ export default {
       this.trio = 0;
       this.trifecta = 0;
 
-    }
+    },
+    formationSelectionShow: function () {
+      if (this.formationDefaultCard.selectFormula == '枠連'
+        || this.formationDefaultCard.selectFormula == '馬連'
+        || this.formationDefaultCard.selectFormula == '馬単'
+        || this.formationDefaultCard.selectFormula == 'ワイド') {
+        this.formationSelection3Show = false;
+      } else if (this.formationDefaultCard.selectFormula == '3連複'
+        || this.formationDefaultCard.selectFormula == '3連単') {
+        this.formationSelection3Show = true;
+      }
+    },
+
+    normalSelectionShow: function () {
+      if (this.normalDefaultCard.selectFormula == '単勝'
+        || this.normalDefaultCard.selectFormula == '複勝') {
+        this.normalSelection2Show = false;
+        this.normalSelection3Show = false;
+
+      } else if (this.normalDefaultCard.selectFormula == '枠連'
+        || this.normalDefaultCard.selectFormula == '馬連'
+        || this.normalDefaultCard.selectFormula == '馬単'
+        || this.normalDefaultCard.selectFormula == 'ワイド') {
+        this.normalSelection2Show = true;
+        this.normalSelection3Show = false;
+      } else if (this.normalDefaultCard.selectFormula == '3連複'
+        || this.normalDefaultCard.selectFormula == '3連単') {
+        this.normalSelection2Show = true;
+        this.normalSelection3Show = true;
+      }
+    },
   },
+
+
 
   async mounted() {
     if (this.$store.state.bettingTicketId) {

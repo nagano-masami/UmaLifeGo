@@ -42,7 +42,7 @@
 
 <script>
 export default {
-    props: ['defaultCard'],
+    props: ['defaultCard','inputFormula'],
     methods: {
         updatedData() {
             this.$emit('update-default-card', this.defaultCard)
@@ -50,7 +50,7 @@ export default {
     },
     data () {
         return {
-            formula: ['枠連','馬連','馬単','ワイド','3連複','3連単'],
+            formula: this.inputFormula,
             unit: [
                 { text: '万円' , digit: 10000 },
                 { text: '千円', digit: 1000 },
