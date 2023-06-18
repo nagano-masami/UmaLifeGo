@@ -10,10 +10,10 @@
 
     <v-toolbar elevation="0">
       <v-spacer></v-spacer>
-      <v-text-field label="投資額" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'"
+      <v-text-field label="合計投資額" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'"
         @click:append="show1 = !show1" v-model="InvestmentAmount" readonly></v-text-field>
       <v-spacer></v-spacer>
-      <v-text-field label="収支" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'" :type="show2 ? 'text' : 'password'"
+      <v-text-field label="合計収支" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'" :type="show2 ? 'text' : 'password'"
         @click:append="show2 = !show2" v-model="balance" readonly></v-text-field>
       <v-spacer></v-spacer>
       <v-btn-toggle style="color: var(--main-color)" group>

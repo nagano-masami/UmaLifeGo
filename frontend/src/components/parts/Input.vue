@@ -528,6 +528,7 @@ export default {
         || this.formationDefaultCard.selectFormula == '馬単'
         || this.formationDefaultCard.selectFormula == 'ワイド') {
         this.formationSelection3Show = false;
+        this.formationSelection3 = []
       } else if (this.formationDefaultCard.selectFormula == '3連複'
         || this.formationDefaultCard.selectFormula == '3連単') {
         this.formationSelection3Show = true;
@@ -539,13 +540,16 @@ export default {
         || this.normalDefaultCard.selectFormula == '複勝') {
         this.normalSelection2Show = false;
         this.normalSelection3Show = false;
+        this.normalSelection2 = []
+        this.normalSelection3 = []
 
       } else if (this.normalDefaultCard.selectFormula == '枠連'
         || this.normalDefaultCard.selectFormula == '馬連'
         || this.normalDefaultCard.selectFormula == '馬単'
         || this.normalDefaultCard.selectFormula == 'ワイド') {
         this.normalSelection2Show = true;
-        this.normalSelection3Show = false;
+        this.normalSelection3Show = false;        
+        this.normalSelection3 = []
       } else if (this.normalDefaultCard.selectFormula == '3連複'
         || this.normalDefaultCard.selectFormula == '3連単') {
         this.normalSelection2Show = true;
