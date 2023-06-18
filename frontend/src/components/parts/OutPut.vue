@@ -2,11 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12">
-        <BarChart
-          :styles="myStyles"
-          :chart-data="datacollection"
-          :options="options"
-        ></BarChart>
+        <BarChart :styles="myStyles" :chart-data="datacollection" :options="options"></BarChart>
       </v-col>
     </v-row>
 
@@ -21,14 +17,8 @@
         <v-card class="elevation-0">
           <v-card-text>
             <v-form>
-              <v-text-field
-                reverse
-                label="当年収支"
-                id="balanceInYear"
-                name="balanceInYear"
-                v-model="balanceInYear"
-                readonly
-              ></v-text-field>
+              <v-text-field reverse label="当年収支" id="balanceInYear" name="balanceInYear" v-model="balanceInYear"
+                readonly></v-text-field>
             </v-form>
           </v-card-text>
         </v-card>
@@ -37,41 +27,28 @@
         <v-card class="elevation-0">
           <v-card-text>
             <v-form>
-              <v-text-field
-                reverse
-                label="当年回収率"
-                id="recoveryRateInYear"
-                name="recoveryRateInYear"
-                v-model="recoveryRateInYear"
-                readonly
-              ></v-text-field>
+              <v-text-field reverse label="当年回収率" id="recoveryRateInYear" name="recoveryRateInYear"
+                v-model="recoveryRateInYear" readonly></v-text-field>
             </v-form>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
 
-<!--     <v-row dense align="center" justify="space-between">
+    <!--     <v-row dense align="center" justify="space-between">
       <v-col cols="2" offset="1">
         <v-select label="過去戦績(年)" :items="months"></v-select>
       </v-col>
     </v-row> -->
 
     <v-row dense align="center" justify="center">
-      <v-data-table
-        :headers="tableheaders"
-        :items="tablevalue"
-        class="elevation-10"
-      >
-          <template v-slot:[`item.kaisyuritu`]="{item}">
-            <v-chip
-              :color="getColor(item.kaisyuritu)"
-              dark
-            >
-              {{ item.kaisyuritu }}
-            </v-chip>
+      <v-data-table :headers="tableheaders" :items="tablevalue" class="elevation-10">
+        <template v-slot:[`item.kaisyuritu`]="{ item }">
+          <v-chip :color="getColor(item.kaisyuritu)" dark>
+            {{ item.kaisyuritu }}
+          </v-chip>
 
-          </template>
+        </template>
       </v-data-table>
     </v-row>
   </v-container>
@@ -80,7 +57,7 @@
 <script>
 // BarChart.jsでvue-chart.jsを読み込んでる。分けるのが公式の推奨らしい？
 import BarChart from "../../plugins/BarChart";
-
+import axios from "axios";
 export default {
   name: "LineSample",
   components: {
@@ -95,7 +72,7 @@ export default {
     // 全体的なオプション定義を入れる変数
     options: null,
     months: [
-      "1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月",
+      "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月",
     ],
     tableheaders: [
       {
@@ -114,13 +91,14 @@ export default {
         text: '回収率（払戻額/購入額：％）',
         align: 'center',
         sortable: false,
-        value: 'kaisyuritu'}
+        value: 'kaisyuritu'
+      }
     ],
     tablevalue: [
-      { year: '2023' , syushi: '123' , kaisyuritu: '345'},
-      { year: '2022' , syushi: '123' , kaisyuritu: '098'},
-      { year: '2021' , syushi: '123' , kaisyuritu: '123'},
-      { year: '2020' , syushi: '123' , kaisyuritu: '012'},
+      { year: '2023', syushi: '123', kaisyuritu: '345' },
+      { year: '2022', syushi: '123', kaisyuritu: '098' },
+      { year: '2021', syushi: '123', kaisyuritu: '123' },
+      { year: '2020', syushi: '123', kaisyuritu: '012' },
     ],
     showPassword: false,
     balanceInYear: "0003",
@@ -130,7 +108,27 @@ export default {
   }),
 
   // ロード時fillData()が実行される(mounted)
-  mounted() {
+  async mounted() {
+    // tablevalue
+    // balanceInYear
+    // datacollection
+    // recoveryRateInYear
+    const param = {
+      id: this.$store.state.id
+    };
+    try {
+      const result = await axios.post("http://localhost:3000/getOutputInfo", param);
+      if (result.data != "NG") {
+        // Output情報取得成功の場合
+
+      } else {
+        // Output情報取得に失敗した場合
+        console.log("Output情報取得に失敗しました。");
+        alert("Output情報取得に失敗しました。");
+      }
+    } catch {
+      alert("処理に失敗しました。");
+    }
     this.fillData();
     this.myStyles();
   },
@@ -223,13 +221,16 @@ export default {
         maintainAspectRatio: false,
       };
     },
-    getColor(kaisyuritu){
+    getColor(kaisyuritu) {
       if (kaisyuritu > 100) return '#00C853'
       else if (kaisyuritu < 100) return '#FFD600'
       else return 'red'
     },
-    
+
   },
+
+
+
 };
 </script>
 <style>

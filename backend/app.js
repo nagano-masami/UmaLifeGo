@@ -14,6 +14,12 @@ var indexRouter = require('./routes/index');
 var deleteRouter = require('./routes/delete');
 var loginRouter = require('./routes/login'); //追加
 var getHistoriesRouter = require('./routes/getHistories'); //追加
+var loadRaceInfosRouter = require('./routes/getRaceInfos'); //追加
+var getInitInfoRouter = require('./routes/getInitInfo'); //追加
+var deleteRaceInfoRouter = require('./routes/deleteRaceInfo'); //追加
+var getRaceInfoRouter = require('./routes/getRaceInfo'); //追加
+var saveRaceInfoRouter = require('./routes/saveRaceInfo'); //追加
+var getOutputInfoRouter = require('./routes/getOutputInfo'); //追加
 //expressモジュールをインスタンス化
 //appという変数名にするのが慣例
 var app = express();
@@ -50,23 +56,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/delete', deleteRouter);
 app.use('/login', loginRouter);
-app.use('/getHistories',getHistoriesRouter)
-
-
+app.use('/getHistories', getHistoriesRouter);
+app.use('/getInitInfo', getInitInfoRouter);
+app.use('/getRaceInfos', loadRaceInfosRouter);
+app.use('/deleteRaceInfo', deleteRaceInfoRouter);
+app.use('/getRaceInfo', getRaceInfoRouter);
+app.use('/saveRaceInfo', saveRaceInfoRouter);
+app.use('/getOutputInfo', getOutputInfoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  // 404が発生した場合、nextで次のエラーハンドル処理を呼び出してる？つまりカスタムエラーハンドル処理(64行目)
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  // error.ejsで使うローカル変数を定義してる。
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
++
   // render the error page
   res.status(err.status || 500);
+  // error.ejsに処理を移す
   res.render('error');
 });
 
