@@ -22,8 +22,8 @@ insert into m_mark_amount_box values('admin','00004','001',2,1200,0);
 insert into m_mark_amount_box values('admin','00007','001',1,2400,0);
 
 -- m_mark_horse_box
-insert into m_mark_horse_basic values('admin','00004','001',false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false);
-insert into m_mark_horse_basic values('admin','00007','001',false,false,false,false,false,true,false,false,true,false,true,false,false,true,false,false,false,false);
+insert into m_mark_horse_box values('admin','00004','001',false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false);
+insert into m_mark_horse_box values('admin','00007','001',false,false,false,false,false,true,false,false,true,false,true,false,false,true,false,false,false,false);
 
 -- m_mark_amount_formation
 insert into m_mark_amount_formation values('admin','00001','001',2,2000,15400);
