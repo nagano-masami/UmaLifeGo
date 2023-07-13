@@ -6,7 +6,7 @@ CREATE TABLE m_mark_amount_formation (
  purchase_total_amount  INT,
  refund_amount          INT,
  PRIMARY KEY (user_id, betting_ticket_id),
- FOREIGN KEY (user_id) REFERENCES USERS(id) ON UPDATE CASCADE,
- FOREIGN KEY (betting_ticket_id) REFERENCES m_betting_ticket_info(betting_ticket_id) ON UPDATE CASCADE,
+ FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE,
+ FOREIGN KEY (betting_ticket_id) REFERENCES m_betting_ticket_info(betting_ticket_id) ON DELETE CASCADE ON UPDATE CASCADE,
  FOREIGN KEY (amount_unit_id) REFERENCES d_amount_unit(id) ON UPDATE CASCADE
  );

@@ -14,7 +14,7 @@ CREATE TABLE m_betting_ticket_info (
  outline                VARCHAR(80),
  PRIMARY KEY (user_id, betting_ticket_id),
  INDEX betting_ticket_id_indx(betting_ticket_id),
- FOREIGN KEY (user_id) REFERENCES USERS (id) ON UPDATE CASCADE,
+ FOREIGN KEY (user_id) REFERENCES USERS (id) ON DELETE CASCADE ON UPDATE CASCADE,
  FOREIGN KEY (race_track_id) REFERENCES d_racing_course (id) ON UPDATE CASCADE,
  FOREIGN KEY (ticket_category_id) REFERENCES d_ticket_category (id) ON UPDATE CASCADE,
  FOREIGN KEY (ticket_selection_id) REFERENCES d_ticket_selections (id) ON UPDATE CASCADE

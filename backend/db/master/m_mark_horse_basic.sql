@@ -21,6 +21,6 @@ CREATE TABLE m_mark_horse_basic (
  number17_flag          BOOLEAN,
  number18_flag          BOOLEAN,
  PRIMARY KEY (user_id, betting_ticket_id, select_item_id),
- FOREIGN KEY (user_id) REFERENCES USERS(id) ON UPDATE CASCADE,
- FOREIGN KEY (betting_ticket_id) REFERENCES m_betting_ticket_info(betting_ticket_id) ON UPDATE CASCADE
+ FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE,
+ FOREIGN KEY (betting_ticket_id) REFERENCES m_betting_ticket_info(betting_ticket_id) ON DELETE CASCADE ON UPDATE CASCADE
  );
