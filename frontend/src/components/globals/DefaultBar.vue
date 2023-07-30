@@ -6,7 +6,7 @@
           ref="menu"
           v-model="menu"
           :close-on-content-click="false"
-          :return-value.sync="date"
+          :return-value.sync="defaultBar.selectDate"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -14,7 +14,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-              v-model="date"
+              v-model="defaultBar.selectDate"
               label="日付"
               prepend-icon="mdi-calendar"
               hide-details
@@ -24,7 +24,8 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="date"
+            v-model="defaultBar.selectDate"
+            @input="updatedData"
             no-title
             scrollable
           >
@@ -38,8 +39,9 @@
             </v-btn>
             <v-btn
               text
+              @click="$refs.menu.save(defaultBar.selectDate)"
               style="color: var(--main-color)"
-              @click="$refs.menu.save(date)"
+
             >
               OK
             </v-btn>
@@ -49,6 +51,8 @@
       
       <v-combobox
         :items="places"
+        v-model="defaultBar.selectPlace"
+        @input="updatedData"
         editable
         label="場名"
         hide-details
@@ -58,6 +62,8 @@
     
       <v-combobox
         :items="race_no"
+        v-model="defaultBar.selectRace_no"
+        @input="updatedData"
         editable
         label="レース番号"
         hide-details
@@ -70,12 +76,19 @@
 
 <script>
 export default {
+  props: ['defaultBar'],
+    methods: {
+    updatedData() {
+            this.$emit('update-default-bar', this.defaultBar)
+        },
+  },
     data () {
         return {
             places: [
             '中山','東京','京都','阪神','福島','新潟','中京','小倉','札幌','函館'
             ],
             race_no: [1,2,3,4,5,6,7,8,9,10,11,12],
+            menu:false
         }
     }
 }
