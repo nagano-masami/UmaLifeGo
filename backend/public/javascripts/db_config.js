@@ -1,5 +1,5 @@
 exports.mysql_setting = {
-    host: '10.0.1.254',
+    host: 'sg-ames-game-rds-mysql',
     user: 'root',
     password: 'Qpb0NZA4xhQWpBmulc4Z',
     database: 'essp_db',
