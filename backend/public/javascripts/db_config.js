@@ -1,9 +1,9 @@
 exports.mysql_setting = {
-    host: 'sg-ames-game-rds-mysql.cet7v53vctjw.ap-northeast-1.rds.amazonaws.com',
-    user: 'root',
-    password: '',
-    database: 'essp_db',
-    timezone: 'jst'
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+    timezone: process.env.timezone
 };
 exports.loginSQL = 'SELECT * from USERS where id=? AND password=?';
 exports.insertRecordSQL = 'INSERT INTO CHATS(id,user_id,message,create_date) VALUES(?, ?, ?, ?)';
