@@ -114,9 +114,11 @@ export default {
 
         try {
           let result = await axios.post("http://localhost:3000/getRaceInfos", param);
-          if (result.data !== "NG") {
+          let resultData = result.data;
+          console.log(resultData);
+          if (resultData !== "NG") {
             // historyの取得に成功した場合
-            this.raceInfoDistinguish(result.data);
+            this.raceInfoDistinguish(resultData);
           } else {
             // historyの取得に失敗した場合
             console.log("historyのデータ取得に失敗しました。");
@@ -133,9 +135,10 @@ export default {
             id: this.$store.state.id
           };
           let result = await axios.post("http://localhost:3000/getInitInfo", param);
-          if (result.data !== "NG") {
+          let resultData = result.data;
+          if (resultData !== "NG") {
             // 履歴の取得に成功した場合
-            this.raceInfoDistinguish(result.data);
+            this.raceInfoDistinguish(resultData);
           } else {
             // 履歴の取得に失敗した場合
             console.log("historyの初期表示データの取得に失敗しました。");
