@@ -570,16 +570,16 @@ export default {
 
       try {
         let result = await axios.post("http://localhost:3000/getRaceInfo", param);
-        if (result.data !== 'NG') {
-
-          let raceInfo = result.data[0];
+        let raceInfo = result.data;
+        console.log(raceInfo);
+        if (raceInfo !== 'NG') {
           // 馬券情報の取得に成功した場合
           this.defaultBar.selectDate = raceInfo.race_date;
           this.defaultBar.selectPlace = raceInfo.race_track_j_name;
           this.defaultBar.selectRace_no = raceInfo.race_number;
           this.InvestmentAmount = raceInfo.purchase_total_amount;
-          this.balance = raceInfo.refund_amount
-
+          this.balance = raceInfo.refund_amount;
+          
           if (raceInfo.ticket_class_j_name == "ボックス") {
             this.tab = "tab-1";
 

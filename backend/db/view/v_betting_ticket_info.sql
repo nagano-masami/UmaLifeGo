@@ -85,7 +85,7 @@ from m_betting_ticket_info M1
 inner join m_mark_horse_basic M2
 on M2.user_id = M1.user_id
 and M2.betting_ticket_id = M1.betting_ticket_id
-inner join m_mark_amount_basix M3
+inner join m_mark_amount_basic M3
 on M3.user_id = M1.user_id
 and M3.betting_ticket_id = M1.betting_ticket_id
 left outer join d_racing_course D1
