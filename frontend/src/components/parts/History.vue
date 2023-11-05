@@ -160,8 +160,6 @@ export default {
 
     // 既存のカードの編集処理
 
-    // 既存のカードの削除処理
-
     //historyから読み込んだ情報を通常、フォーメーション、ボックス、ALLに振り分けて表示する処理
     raceInfoDistinguish(raceInfos) {
 

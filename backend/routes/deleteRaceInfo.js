@@ -9,21 +9,74 @@ router.post('/', async (req, res, next) => {
 
   const betting_ticket_id = req.body.betting_ticket_id;
   const id = req.body.id;
-  const connection = new DatabaseConnection();
+  // const connection = new DatabaseConnection();
 
-  try {
-    await connection.connect(config.mysql_setting);
-    await connection.beginTransaction();
-    await connection.query(config.deleteRaceInfoSQL,[id,betting_ticket_id]);
-    await connection.commit();
-    res.send('OK');
-  } catch (error) {
-    console.error(error);
-    await connection.rollback();
-    res.send('NG');
-  } finally {
-    connection.end();
+  var connection = mysql.createConnection(config.mysql_setting);
+
+  // チケット種別によって削除SQLを変更するためにdbから情報を取得
+  var ticketCategoryId = "";
+  connection.query(config.getTicketCategorySQL, [id, betting_ticket_id], function (error, results, fields){
+    if(error){
+      throw error;
+    }
+    
+    ticketCategoryId = results[0].tikcet_category_id;
+  });
+
+  // チケット種別によって削除SQLを変える
+  var executeDeleteAmountSQL = "";
+  var executeDeleteHorseSQL = "";
+
+  switch(ticketCategoryId){
+    case '002':
+      executeDeleteAmountSQL = config.deleteBoxMarkAmountSQL;
+      executeDeleteHorseSQL = config.deleteBoxMarkHorseSQL;
+      break;
+    case '003':
+      executeDeleteAmountSQL = config.deleteFormationMarkAmountSQL;
+      executeDeleteHorseSQL = config.deleteFormationMarkHorseSQL;
+      break;
+    default:
+      executeDeleteAmountSQL = config.deleteBasicMarkAmountSQL;
+      executeDeleteHorseSQL = config.deleteBasicMarkHorseSQL;
+      break;
   }
+
+  // 整合性確保のためトランザクション張る
+  connection.beginTransaction((err) => {
+    if(err){
+      throw err;
+    }
+
+    // 馬券情報削除
+    connection.query(config.deleteRaceInfoSQL, [id, betting_ticket_id], function (error, results, fields){
+      if(error){
+        return connection.rollback(() => { throw error; });
+      }
+    });
+    // 金額削除
+    connection.query(executeDeleteAmountSQL, [id, betting_ticket_id], function (error, results, fields){
+      if(error){
+        return connection.rollback(() => { throw error; });
+      }
+    });
+    // 馬番号削除
+    connection.query(executeDeleteHorseSQL, [id, betting_ticket_id], function (error, results, fields){
+      if(error){
+        return connection.rollback(() => { throw error; });
+      }
+    });
+
+    connection.commit((err) => {
+      if(err){
+          return connection.rollcack(()=>{
+              throw err;
+          });
+      }
+    });
+    console.log("success");
+
+  })
 });
 
 
