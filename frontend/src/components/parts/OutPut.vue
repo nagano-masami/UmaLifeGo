@@ -140,17 +140,25 @@ export default {
     } catch {
       alert("処理に失敗しました。");
     }
-    this.fillData();
+    this.fillData(resultsData);
     this.myStyles();
   },
 
   methods: {
     // datacollection(図形データ)とoptions(全体的なオプション)に中身を代入するメソッド。
-    fillData() {
+    fillData(resultData) {
       // mockデータを使い、のちにdbから取得したデータに変える予定
+
+      var graphYears = [];
+      var graphBalanceData = [];
+      resultData.forEach(function (element){
+        graphYears.push(element.race_year);
+        graphBalanceData.push(element.total_balance);
+      });
+
       this.datacollection = {
         // グラフの下に記載されるラベル
-        labels: [2001, 2002, 2003, 2004],
+        labels: graphYears,
 
         // datasetsの中にデータやオプションをグループ事に定義する
         datasets: [
@@ -159,7 +167,7 @@ export default {
             backgroundColor: [""],
 
             // データ
-            data: [-200, -300, 600, 500],
+            data: graphBalanceData,
           },
         ],
       };
@@ -213,8 +221,8 @@ export default {
                 beginAtZero: true,
 
                 // メモリの最小値、最大値
-                min: -1000,
-                max: 1000,
+                min: -100000,
+                max: 100000,
               },
             },
           ],
