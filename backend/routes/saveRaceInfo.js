@@ -9,27 +9,89 @@ router.post('/', async (req, res, next) => {
 
     raceInfo = req.body;
     const id = req.body.id;
-    //const connection = new DatabaseConnection();
 
     var connection = mysql.createConnection(config.mysql_setting);
     var errorExits = false;
-    var newBettingTicketId = "";
+    var newBettingTicketId = raceInfo.bettingTicketId;
+    var ticketCategoryId = "";
 
-    // 最新の馬券IDを取得(insert時に使用)
-    connection.query(config.getBettingTicketIdSQL, [id], function(error, results, fields) {
-        if (!error) {
-            newBettingTicketId = ('00000' + results[0].new_beting_ticket_id).slice(-5);
-            errorExits = false;
-         } else {
-             errorExits = true;
-             return connection.rollback(() => { throw error; });
-         }
-    });
+    var updateFlag = false;
+
+    if(!!raceInfo.bettingTicketId){
+        updateFlag = true;
+    }
+
+    // 新規作成用：最新の馬券IDを取得
+    if(!updateFlag){
+        connection.query(config.getBettingTicketIdSQL, [id], function(error, results, fields) {
+            if (!error) {
+                newBettingTicketId = ('00000' + results[0].new_beting_ticket_id).slice(-5);
+                errorExits = false;
+            } else {
+                errorExits = true;
+                return connection.rollback(() => { throw error; });
+            }
+        });
+    }
+
+    // 更新時用：チケット種別によって削除SQLを変更するためにdbから情報を取得
+    if(updateFlag){
+        connection.query(config.getTicketCategorySQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
+            if(error){
+                throw error;
+            }
+    
+            ticketCategoryId = results[0].tikcet_category_id;
+        });
+    }
+    
     // 整合性確保のためトランザクション張る
     connection.beginTransaction((err) => {
         if(err){ throw err; }
-        
+
         if(!errorExits){
+            // 更新時は一度データを削除する(updateだと馬番号更新の部分でごちゃつくため)
+            // deleteRaceInfo.jsを呼び出せるように変えたいが、いったんベタがき
+            if(updateFlag){
+                // チケット種別によって削除SQLを変える
+                var executeDeleteAmountSQL = "";
+                var executeDeleteHorseSQL = "";
+
+                switch(ticketCategoryId){
+                    case '002':
+                        executeDeleteAmountSQL = config.deleteBoxMarkAmountSQL;
+                        executeDeleteHorseSQL = config.deleteBoxMarkHorseSQL;
+                        break;
+                    case '003':
+                        executeDeleteAmountSQL = config.deleteFormationMarkAmountSQL;
+                        executeDeleteHorseSQL = config.deleteFormationMarkHorseSQL;
+                        break;
+                    default:
+                        executeDeleteAmountSQL = config.deleteBasicMarkAmountSQL;
+                        executeDeleteHorseSQL = config.deleteBasicMarkHorseSQL;
+                        break;
+                }
+
+                // 馬券情報削除
+                connection.query(config.deleteRaceInfoSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
+                    if(error){
+                        return connection.rollback(() => { throw error; });
+                    }
+                });
+                // 金額削除
+                connection.query(executeDeleteAmountSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
+                    if(error){
+                        return connection.rollback(() => { throw error; });
+                    }
+                });
+                // 馬番号削除
+                connection.query(executeDeleteHorseSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
+                    if(error){
+                        return connection.rollback(() => { throw error; });
+                    }
+                });
+            }
+        
             var executionAmountSql;
             var executionHorseSql;
 
