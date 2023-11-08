@@ -119,7 +119,7 @@ export default {
       id: this.$store.state.id
     };
     try {
-      const result = await axios.post("http://localhost:3000/getOutputInfo", param);
+      const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getOutputInfo", param);
       var resultsData = result.data;
       if (resultsData != "NG") {
         // Output情報取得成功の場合

@@ -66,7 +66,7 @@ export default new Vuex.Store({
       }
 
       try {
-        const loginResult = await axios.post('http://localhost:3000/login', param);
+        const loginResult = await axios.post('http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/login', param);
         if (loginResult.data === 'OK') {
           // 認証に成功した場合
           commit('login', param);

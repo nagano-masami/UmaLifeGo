@@ -17,7 +17,7 @@
         @click:append="show2 = !show2" v-model="balance" readonly></v-text-field>
       <v-spacer></v-spacer>
       <v-btn-toggle style="color: var(--main-color)" group>
-        <v-btn @click="loadRaceInfo">
+        <v-btn @click="load">
           読込
           <v-icon>mdi-reload</v-icon>
         </v-btn>
@@ -102,8 +102,34 @@ export default {
     }
   },
   methods: {
+    // 読み込み
+    async load() {
 
-    // Historyの読込処理
+      if (this.defaultBar.selectDate && this.defaultBar.selectPlace && this.defaultBar.selectRace_no) {
+        const param = {
+          defaultBar: this.defaultBar,
+          id: this.$store.state.id
+        };
+
+        try {
+          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfos", param);
+          if (result.data !== "NG") {
+            // historyの取得に成功した場合
+            this.raceInfoDistinguish(result.data);
+          } else {
+            // historyの取得に失敗した場合
+            console.log("historyのデータ取得に失敗しました。");
+            alert("historyのデータ取得に失敗しました。");
+          }
+        } catch {
+          alert("処理に失敗しました。");
+        }
+      } else {
+        alert("入力内容が不足しています。");
+      }
+    },
+
+    // Historyの読込処理(初期表示の読み込みと条件ありの読み込み)
     async loadRaceInfo() {
 
       if (this.defaultBar.selectDate && this.defaultBar.selectPlace && this.defaultBar.selectRace_no) {
@@ -113,7 +139,7 @@ export default {
         };
 
         try {
-          let result = await axios.post("http://localhost:3000/getRaceInfos", param);
+          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfos", param);
           let resultData = result.data;
           console.log(resultData);
           if (resultData !== "NG") {
@@ -134,7 +160,7 @@ export default {
           const param = {
             id: this.$store.state.id
           };
-          let result = await axios.post("http://localhost:3000/getInitInfo", param);
+          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getInitInfo", param);
           let resultData = result.data;
           if (resultData !== "NG") {
             // 履歴の取得に成功した場合
@@ -207,7 +233,7 @@ export default {
 
   async mounted() {
 
-    this.socket = io("localhost:3000");
+    this.socket = io("UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000");
 
     if (this.$store.state.loadRaceInfoInStoreFlag) {
       this.defaultBar.selectDate = this.$store.state.selectDate;
