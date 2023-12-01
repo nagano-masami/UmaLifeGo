@@ -214,8 +214,8 @@ router.post('/', async (req, res, next) => {
 
                 // DB用にデータを改変する
                 // 馬番号毎にtrue or falseの形にしたい
-                for(var a=0; a< horseSelections.length; a++){
-                    switch(horseSelections[a]){
+                for(var a=0; a< horseSelections[i].length; a++){
+                    switch(horseSelections[i][a]){
                         case "01": selectHorseNumber1 = true; break;
                         case "02": selectHorseNumber2 = true; break;
                         case "03": selectHorseNumber3 = true; break;
