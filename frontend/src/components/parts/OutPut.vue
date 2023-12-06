@@ -43,9 +43,9 @@
 
     <v-row dense align="center" justify="center">
       <v-data-table :headers="tableheaders" :items="tablevalue" class="elevation-10">
-        <template v-slot:[`item.kaisyuritu`]="{ item }">
-          <v-chip :color="getColor(item.kaisyuritu)" dark>
-            {{ item.kaisyuritu }}
+        <template v-slot:[`item.recovery_rate`]="{ item }">
+          <v-chip :color="getColor(item.recovery_rate)" dark>
+            {{ item.recovery_rate }}
           </v-chip>
 
         </template>
@@ -79,32 +79,34 @@ export default {
         text: '年',
         align: 'center',
         sortable: false,
-        value: 'year'
+        //value: 'year'
+        value: 'race_year'
       },
       {
         text: '収支（払戻額ー購入額：円）',
         align: 'center',
         sortable: false,
-        value: 'syushi'
+        //value: 'syushi'
+        value: 'total_balance'
       },
       {
         text: '回収率（払戻額/購入額：％）',
         align: 'center',
         sortable: false,
-        value: 'kaisyuritu'
+        //value: 'kaisyuritu'
+        value: 'recovery_rate'
       }
     ],
-    tablevalue: [
-      { year: '2023', syushi: '123', kaisyuritu: '345' },
-      { year: '2022', syushi: '123', kaisyuritu: '098' },
-      { year: '2021', syushi: '123', kaisyuritu: '123' },
-      { year: '2020', syushi: '123', kaisyuritu: '012' },
-    ],
+    tablevalue: [],
+      // { year: '2023', syushi: '123', kaisyuritu: '345' },
+      // { year: '2022', syushi: '123', kaisyuritu: '098' },
+      // { year: '2021', syushi: '123', kaisyuritu: '123' },
+      // { year: '2020', syushi: '123', kaisyuritu: '012' },
     showPassword: false,
-    balanceInYear: "0003",
-    recoveryRateInYear: "0004",
-    balanceInMonth: "0007",
-    recoveryRateInMonth: "0008",
+    balanceInYear: "",
+    recoveryRateInYear: "",
+    //balanceInMonth: "0007",
+    //recoveryRateInMonth: "0008",
   }),
 
   // ロード時fillData()が実行される(mounted)
@@ -118,10 +120,19 @@ export default {
     };
     try {
       const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getOutputInfo", param);
-      if (result.data != "NG") {
+      var resultsData = result.data;
+      if (resultsData != "NG") {
         // Output情報取得成功の場合
+         this.tablevalue = resultsData;
+         
+         const now = new Date();
+         var nowYear = now.getFullYear();
 
-      } else {
+         var nowYearData = resultsData.find(e => e.race_year === nowYear.toString());
+         this.balanceInYear = nowYearData.total_balance;
+         this.recoveryRateInYear = nowYearData.recovery_rate;
+      }
+      else {
         // Output情報取得に失敗した場合
         console.log("Output情報取得に失敗しました。");
         alert("Output情報取得に失敗しました。");
@@ -129,17 +140,25 @@ export default {
     } catch {
       alert("処理に失敗しました。");
     }
-    this.fillData();
+    this.fillData(resultsData);
     this.myStyles();
   },
 
   methods: {
     // datacollection(図形データ)とoptions(全体的なオプション)に中身を代入するメソッド。
-    fillData() {
+    fillData(resultData) {
       // mockデータを使い、のちにdbから取得したデータに変える予定
+
+      var graphYears = [];
+      var graphBalanceData = [];
+      resultData.forEach(function (element){
+        graphYears.push(element.race_year);
+        graphBalanceData.push(element.total_balance);
+      });
+
       this.datacollection = {
         // グラフの下に記載されるラベル
-        labels: [2001, 2002, 2003, 2004],
+        labels: graphYears,
 
         // datasetsの中にデータやオプションをグループ事に定義する
         datasets: [
@@ -148,7 +167,7 @@ export default {
             backgroundColor: [""],
 
             // データ
-            data: [-200, -300, 600, 500],
+            data: graphBalanceData,
           },
         ],
       };
@@ -202,8 +221,8 @@ export default {
                 beginAtZero: true,
 
                 // メモリの最小値、最大値
-                min: -1000,
-                max: 1000,
+                min: -100000,
+                max: 100000,
               },
             },
           ],
@@ -221,9 +240,9 @@ export default {
         maintainAspectRatio: false,
       };
     },
-    getColor(kaisyuritu) {
-      if (kaisyuritu > 100) return '#00C853'
-      else if (kaisyuritu < 100) return '#FFD600'
+    getColor(recovery_rate) {
+      if (recovery_rate > 100) return '#00C853'
+      else if (recovery_rate < 100) return '#FFD600'
       else return 'red'
     },
 

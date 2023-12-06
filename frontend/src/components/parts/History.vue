@@ -140,9 +140,11 @@ export default {
 
         try {
           let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfos", param);
-          if (result.data !== "NG") {
+          let resultData = result.data;
+          console.log(resultData);
+          if (resultData !== "NG") {
             // historyの取得に成功した場合
-            this.raceInfoDistinguish(result.data);
+            this.raceInfoDistinguish(resultData);
           } else {
             // historyの取得に失敗した場合
             console.log("historyのデータ取得に失敗しました。");
@@ -159,9 +161,10 @@ export default {
             id: this.$store.state.id
           };
           let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getInitInfo", param);
-          if (result.data !== "NG") {
+          let resultData = result.data;
+          if (resultData !== "NG") {
             // 履歴の取得に成功した場合
-            this.raceInfoDistinguish(result.data);
+            this.raceInfoDistinguish(resultData);
           } else {
             // 履歴の取得に失敗した場合
             console.log("historyの初期表示データの取得に失敗しました。");
@@ -182,8 +185,6 @@ export default {
     },
 
     // 既存のカードの編集処理
-
-    // 既存のカードの削除処理
 
     //historyから読み込んだ情報を通常、フォーメーション、ボックス、ALLに振り分けて表示する処理
     raceInfoDistinguish(raceInfos) {
