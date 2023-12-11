@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
         if (!error) {
             // 返却用のデータ型を初期化
             let resultData ={
-                ticket_class_j_name: "",
+                ticket_category_name: "",
                 race_date: "",
                 race_track_j_name: "",
                 race_number: "",
@@ -82,7 +82,7 @@ router.post('/', (req, res, next) => {
                                 default: amount_unit = 100;
                             }
 
-                            resultData.ticket_class_j_name = horseSelectionData.ticket_category_j_name;
+                            resultData.ticket_category_name = horseSelectionData.ticket_category_j_name;
                             resultData.race_date = horseSelectionData.race_date;
                             resultData.race_track_j_name = horseSelectionData.race_track_j_name;
                             resultData.race_number = horseSelectionData.race_number;

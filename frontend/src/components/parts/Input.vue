@@ -408,7 +408,7 @@ export default {
           selectAmount: null,
           selectUnitText: null,
           selectUnitDigit: null,
-          ticket_class_j_name: null
+          ticket_category_name: null
         };
 
         if (this.tab == "tab-1") {
@@ -418,7 +418,7 @@ export default {
           param.selectAmount = this.boxDefaultCard.selectAmount;
           param.selectUnitText = this.boxDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.boxDefaultCard.selectUnit.digit;
-          param.ticket_class_j_name = "ボックス";
+          param.ticket_category_name = "ボックス";
         }
         if (this.tab == "tab-2") {
 
@@ -437,7 +437,7 @@ export default {
           param.selectAmount = this.formationDefaultCard.selectAmount;
           param.selectUnitText = this.formationDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.formationDefaultCard.selectUnit.digit;
-          param.ticket_class_j_name = "フォーメーション";
+          param.ticket_category_name = "フォーメーション";
         }
         if (this.tab == "tab-3") {
 
@@ -456,7 +456,7 @@ export default {
           param.selectAmount = this.normalDefaultCard.selectAmount;
           param.selectUnitText = this.normalDefaultCard.selectUnit.text;
           param.selectUnitDigit = this.normalDefaultCard.selectUnit.digit;
-          param.ticket_class_j_name = "通常";
+          param.ticket_category_name = "通常";
         }
 
         try {
@@ -580,7 +580,7 @@ export default {
           this.InvestmentAmount = raceInfo.purchase_total_amount;
           this.balance = raceInfo.refund_amount;
           
-          if (raceInfo.ticket_class_j_name == "ボックス") {
+          if (raceInfo.ticket_category_name == "ボックス") {
             this.tab = "tab-1";
 
             this.boxSelection1 = raceInfo.horseSelection1;
@@ -601,7 +601,7 @@ export default {
 
 
           }
-          if (raceInfo.ticket_class_j_name == "フォーメーション") {
+          if (raceInfo.ticket_category_name == "フォーメーション") {
 
             this.tab = "tab-2";
             this.formationSelection1 = raceInfo.horseSelection1;
@@ -621,7 +621,7 @@ export default {
             this.formationDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
 
           }
-          if (raceInfo.ticket_class_j_name == "通常") {
+          if (raceInfo.ticket_category_name == "通常") {
 
             this.tab = "tab-3";
             this.normalSelection1 = raceInfo.horseSelection1;

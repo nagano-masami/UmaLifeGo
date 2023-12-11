@@ -14,19 +14,19 @@ router.post('/', (req, res, next) => {
 
     //raceInfo = [{
     //    betting_ticket_id: 1,
-    //    ticket_class_j_name: 'ボックス',
+    //    ticket_category_name: 'ボックス',
     //    purchase_total_amount: 100,
     //    refund_amount: 10
     //},
     //{
     //    betting_ticket_id: 100,
-    //    ticket_class_j_name: 'フォーメーション',
+    //    ticket_category_name: 'フォーメーション',
     //    purchase_total_amount: 100,
     //    refund_amount: 10
     //},
     //{
     //    betting_ticket_id: 2,
-    //    ticket_class_j_name: '通常',
+    //    ticket_category_name: '通常',
     //    purchase_total_amount: 100,
     //    refund_amount: 10
     //}];

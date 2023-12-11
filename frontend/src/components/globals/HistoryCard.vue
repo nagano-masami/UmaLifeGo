@@ -8,7 +8,7 @@
       color="#FFFDE7"
     >
       <v-card-title style="color: var(--main-color)">{{
-        raceInfo.ticket_class_j_name
+        raceInfo.ticket_category_name
       }}</v-card-title>
 
       <v-toolbar color="#FFFDE7" elevation="0">

@@ -16,7 +16,8 @@ router.post('/', async (req, res, next) => {
   // チケット種別によって削除SQLを変更するためにdbから情報を取得
   var ticketCategoryId = "";
   connection.query(config.getTicketCategorySQL, [id, betting_ticket_id], function (error, results, fields){
-    if(error){
+    if (error) {
+      res.send('NG');
       throw error;
     }
     
@@ -44,37 +45,43 @@ router.post('/', async (req, res, next) => {
 
   // 整合性確保のためトランザクション張る
   connection.beginTransaction((err) => {
-    if(err){
+    if (err) {
+      res.send('NG');
       throw err;
     }
 
     // 馬券情報削除
     connection.query(config.deleteRaceInfoSQL, [id, betting_ticket_id], function (error, results, fields){
-      if(error){
+      if (error) {
+        res.send('NG');
         return connection.rollback(() => { throw error; });
       }
     });
     // 金額削除
     connection.query(executeDeleteAmountSQL, [id, betting_ticket_id], function (error, results, fields){
-      if(error){
+      if (error) {
+        res.send('NG');
         return connection.rollback(() => { throw error; });
       }
     });
     // 馬番号削除
     connection.query(executeDeleteHorseSQL, [id, betting_ticket_id], function (error, results, fields){
-      if(error){
+      if (error) {
+        res.send('NG');
         return connection.rollback(() => { throw error; });
       }
     });
 
     connection.commit((err) => {
-      if(err){
+      if (err) {
+          res.send('NG');
           return connection.rollcack(()=>{
               throw err;
           });
       }
     });
     console.log("success");
+    res.send('OK');
 
   })
 });
