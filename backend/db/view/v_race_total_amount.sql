@@ -76,4 +76,4 @@ group by M1.user_id
 ,D2.english_name
 ,M1.ticket_selection_id
 ,D3.japanese_name
-,D3.english_name
+,D3.english_name;
