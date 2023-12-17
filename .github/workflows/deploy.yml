@@ -11,6 +11,7 @@ jobs:
  build:
    # 実行環境の指定
    runs-on: ubuntu-latest
+   environment: sg-ames-project
    env:
     USER_NAME: ${{ secrets.USER_NAME }}
     BACKEND_HOST_NAME: ${{ secrets.BACKEND_HOST_NAME }}
