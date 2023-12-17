@@ -18,6 +18,7 @@ jobs:
      - name: Deploy
        run: |
          # SSH接続して、git pullする
+         echo "${{ vars.test }}"
          echo "$USER_NAME"
          echo "${{ secrets.PRIVATE_KEY }}" > private_key
          echo "hello sin" > hello
