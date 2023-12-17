@@ -29,6 +29,7 @@ router.post('/', async (req, res, next) => {
                 errorExits = false;
             } else {
                 errorExits = true;
+                res.send('NG');
                 return connection.rollback(() => { throw error; });
             }
         });
@@ -37,7 +38,8 @@ router.post('/', async (req, res, next) => {
     // 更新時用：チケット種別によって削除SQLを変更するためにdbから情報を取得
     if(updateFlag){
         connection.query(config.getTicketCategorySQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
-            if(error){
+            if (error) {
+                res.send('NG');
                 throw error;
             }
     
@@ -74,19 +76,22 @@ router.post('/', async (req, res, next) => {
 
                 // 馬券情報削除
                 connection.query(config.deleteRaceInfoSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
-                    if(error){
+                    if (error) {
+                        res.send('NG');
                         return connection.rollback(() => { throw error; });
                     }
                 });
                 // 金額削除
                 connection.query(executeDeleteAmountSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
-                    if(error){
+                    if (error) {
+                        res.send('NG');
                         return connection.rollback(() => { throw error; });
                     }
                 });
                 // 馬番号削除
                 connection.query(executeDeleteHorseSQL, [id, raceInfo.bettingTicketId], function (error, results, fields){
-                    if(error){
+                    if (error) {
+                        res.send('NG');
                         return connection.rollback(() => { throw error; });
                     }
                 });
@@ -95,7 +100,7 @@ router.post('/', async (req, res, next) => {
             var executionAmountSql;
             var executionHorseSql;
 
-            switch(raceInfo.ticket_class_j_name){
+            switch(raceInfo.ticket_category_name){
                 case "通常" : 
                     executionAmountSql = config.insertBasicMarkAmountSQL;
                     executionHorseSql = config.insertBasicMarkHorseSQL;
@@ -113,7 +118,7 @@ router.post('/', async (req, res, next) => {
             // dbに保存するためにそれぞれの値を加工
             // 式別
             var ticketCategoryId = "";
-            switch(raceInfo.ticket_class_j_name){
+            switch(raceInfo.ticket_category_name){
                 case "ボックス": ticketCategoryId = "002"; break;
                 case "フォーメーション": ticketCategoryId = "003"; break;
                 default: ticketCategoryId = "001"; break;
@@ -165,7 +170,8 @@ router.post('/', async (req, res, next) => {
                     ticketCategoryId,
                     ticketSelectionId
                 ], function(error, results, fields){
-                if(error){
+                    if (error) {
+                    res.send('NG');
                     return connection.rollback(() => { throw error; });
                 }
             })
@@ -180,7 +186,8 @@ router.post('/', async (req, res, next) => {
                     raceInfo.InvestmentAmount,
                     raceInfo.balance
                 ], function (error, results, fields){
-                if(error){
+                    if (error) {
+                    res.send('NG');
                     return connection.rollback(() => { throw error; });
                 }
             });
@@ -260,19 +267,22 @@ router.post('/', async (req, res, next) => {
                         selectHorseNumber17,
                         selectHorseNumber18
                     ], function (error, results, fields){
-                        if(error){
+                        if (error) {
+                            res.send('NG');
                             return connection.rollback(() => { throw error; });
                         }
                 });
             }
             connection.commit((err) => {
-                if(err){
+                if (err) {
+                    res.send('NG');
                     return connection.rollcack(()=>{
                         throw err;
                     });
                 }
             });
             console.log("success");
+            res.send('OK');
         }
 
     })

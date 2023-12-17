@@ -201,15 +201,15 @@ export default {
 
         InvestmentAmount += raceInfo.purchase_total_amount;
         balance += raceInfo.refund_amount;
-        if (raceInfo.ticket_class_j_name == "ボックス") {
+        if (raceInfo.ticket_category_name == "ボックス") {
 
           boxRaceInfos.push(raceInfo);
 
-        } else if (raceInfo.ticket_class_j_name == "フォーメーション") {
+        } else if (raceInfo.ticket_category_name == "フォーメーション") {
 
           formationRaceInfos.push(raceInfo);
 
-        } else if (raceInfo.ticket_class_j_name == "通常") {
+        } else if (raceInfo.ticket_category_name == "通常") {
 
           normalRaceInfos.push(raceInfo);
 

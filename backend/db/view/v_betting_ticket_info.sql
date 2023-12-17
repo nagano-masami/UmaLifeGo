@@ -207,4 +207,4 @@ on D2.id = M1.ticket_category_id
 left outer join d_ticket_selections D3
 on D3.id = M1.ticket_selection_id
 left outer join d_amount_unit D4
-on D4.id = M3.amount_unit_id
+on D4.id = M3.amount_unit_id;
