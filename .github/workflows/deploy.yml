@@ -18,6 +18,7 @@ jobs:
      - name: Deploy
        run: |
          # SSH接続して、git pullする
+         echo "${{ secrets.USER_NAME }}"
          echo "${{ secrets.PRIVATE_KEY }}" > private_key
          chmod 700 private_key
          ssh -oStrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.BACKEND_HOST_NAME }} -i private_key "cd /var/www/UmaLifeGo/backend/ && git pull && npm run start"
