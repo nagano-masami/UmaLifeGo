@@ -13,16 +13,16 @@ jobs:
    runs-on: ubuntu-latest
    env:
     USER_NAME: ${{ secrets.USER_NAME }}
+    BACKEND_HOST_NAME: ${{ secrets.BACKEND_HOST_NAME }}
+    FRONTEND_HOST_NAME: ${{ secrets.FRONTEND_HOST_NAME }}
+    PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
    steps:
      # デプロイする
      - name: Deploy
        run: |
          # SSH接続して、git pullする
-         echo "${{ vars.test }}"
-         echo "$USER_NAME"
-         echo "${{ secrets.PRIVATE_KEY }}" > private_key
-         echo "hello sin" > hello
-         chmod 700 private_key
-         cat private_key
-         cat hello
+         echo "$PRIVATE_KEY" > private_key
+         chmod 777 private_key
+         ssh -i private_key $USER_NAME@$BACKEND_HOST_NAME "cd /var/www/UmaLifeGo/backend/ && git pull && npm run start"
+         ssh -i private_key $USER_NAME@$FRONTEND_HOST_NAME "systemctl stop nginx && cd /var/www/UmaLifeGo/frontend/ && git pull && npm run build && cd /usr/share/nginx/html && yes | cp -rf /var/www/UmaLifeGo/frontend/dist/* ./ && systemctl start nginx"
          rm private_key
