@@ -11,12 +11,14 @@ jobs:
  build:
    # 実行環境の指定
    runs-on: ubuntu-latest
+   env:
+    USER_NAME: ${{ secrets.USER_NAME }}
    steps:
      # デプロイする
      - name: Deploy
        run: |
          # SSH接続して、git pullする
-         echo "${{ secrets.USER_NAME }}"
+         echo "$USER_NAME"
          echo "${{ secrets.PRIVATE_KEY }}" > private_key
          echo "hello sin" > hello
          chmod 700 private_key
