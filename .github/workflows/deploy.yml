@@ -1,6 +1,5 @@
 # Workflowの名前。任意に設定可能
 name: EC2 auto deploy
-
 # アクションが実行されるタイミングを設定。今回はdevelopブランチにpushされた時。
 on:
  push:
@@ -13,9 +12,12 @@ jobs:
    # 実行環境の指定
    runs-on: ubuntu-latest
    steps:
-     - shell: bash
-       env:
-         USER_NAME: ${{ secrets.USER_NAME }}
+     # デプロイする
+     - name: Deploy
        run: |
-         echo "$USER_NAME"   
-    
+         # SSH接続して、git pullする
+         echo "${{ secrets.USER_NAME }}"
+         echo "${{ secrets.PRIVATE_KEY }}" > private_key
+         chmod 700 private_key
+         cat private_key
+         rm private_key
