@@ -18,6 +18,8 @@ jobs:
          # SSH接続して、git pullする
          echo "${{ secrets.USER_NAME }}"
          echo "${{ secrets.PRIVATE_KEY }}" > private_key
+         echo "hello sin" > hello
          chmod 700 private_key
          cat private_key
+         cat hello
          rm private_key
