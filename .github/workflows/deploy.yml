@@ -13,10 +13,9 @@ jobs:
    # 実行環境の指定
    runs-on: ubuntu-latest
    steps:
-
-     # デプロイする
-     - name: Deploy
+     - shell: bash
+       env:
+         USER_NAME: ${{ secrets.USER_NAME }}
        run: |
-         # SSH接続して、git pullする
-         echo "${{ secrets.USER_NAME }}"
-         
+         echo "$USER_NAME"   
+    
