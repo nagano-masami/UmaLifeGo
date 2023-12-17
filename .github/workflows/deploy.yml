@@ -11,7 +11,7 @@ on:
 jobs:
  build:
    # 実行環境の指定
-   runs-on: ubuntu-lates
+   runs-on: ubuntu-latest
    steps:
 
      # デプロイする
