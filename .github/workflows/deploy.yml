@@ -26,5 +26,5 @@ jobs:
          echo "$PRIVATE_KEY" > private_key
          chmod 600 private_key
          ssh -oStrictHostKeyChecking=no -i private_key $USER_NAME@$BACKEND_HOST_NAME "cd /var/www/UmaLifeGo/backend/ && git pull"
-         ssh -oStrictHostKeyChecking=no -i private_key $USER_NAME@$FRONTEND_HOST_NAME "sudo su - && cd /var/www/UmaLifeGo/frontend/ && git pull && npm run build && cd /usr/share/nginx/html && yes | cp -rf /var/www/UmaLifeGo/frontend/dist/* ./"
+         ssh -oStrictHostKeyChecking=no -i private_key $USER_NAME@$FRONTEND_HOST_NAME "sudo su - || cd /var/www/UmaLifeGo/frontend/ && git pull && npm run build && cd /usr/share/nginx/html && yes | cp -rf /var/www/UmaLifeGo/frontend/dist/* ./"
          rm private_key
