@@ -31,9 +31,9 @@
             hide-details
             class="pa-0"
             overflow
-            v-model="defaultCard.selectUnit.text"
+            v-model="defaultCard.selectUnit"
             @input="updatedData"
-            item-value="digit"
+            item-value="defaultCard.selectUnit"
             
         ></v-combobox>
         </v-toolbar>

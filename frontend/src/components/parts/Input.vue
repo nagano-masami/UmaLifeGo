@@ -113,7 +113,7 @@ export default {
       boxDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null }
+        selectUnit: null
       },
 
 
@@ -123,7 +123,7 @@ export default {
       formationDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null },
+        selectUnit: null,
       },
       formationSelection3Show: true,
 
@@ -135,7 +135,7 @@ export default {
       normalDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null },
+        selectUnit: null,
       },
       normalSelection2Show: true,
       normalSelection3Show: true,
@@ -460,7 +460,7 @@ export default {
         }
 
         try {
-          const result = await axios.post("http://localhost:3000/saveRaceInfo", param);
+          const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/saveRaceInfo", param);
           if (result.data === "OK") {
             // 保存に成功した場合
             alert("正常に保存できました");
@@ -492,7 +492,7 @@ export default {
           this.boxDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null }
+            selectUnit: null
           }
       }
       if (this.tab == "tab-2") {
@@ -502,7 +502,7 @@ export default {
           this.formationDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null },
+            selectUnit: null,
           }
       }
       if (this.tab == "tab-3") {
@@ -512,7 +512,7 @@ export default {
           this.normalDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null },
+            selectUnit: null,
           }
       }
 
@@ -569,7 +569,7 @@ export default {
       };
 
       try {
-        let result = await axios.post("http://localhost:3000/getRaceInfo", param);
+        let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfo", param);
         let raceInfo = result.data;
         console.log(raceInfo);
         if (raceInfo !== 'NG') {
@@ -596,8 +596,7 @@ export default {
             }
             this.boxDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.boxDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.boxDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.boxDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
+            this.boxDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
 
           }
@@ -617,8 +616,7 @@ export default {
             }
             this.formationDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.formationDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.formationDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.formationDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
+            this.formationDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
           }
           if (raceInfo.ticket_category_name == "通常") {
@@ -637,9 +635,7 @@ export default {
             }
             this.normalDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.normalDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.normalDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.normalDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
-
+            this.normalDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
           }
 
