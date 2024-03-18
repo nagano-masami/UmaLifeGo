@@ -97,8 +97,8 @@ export default {
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
       show2: true,
-      formula: ['枠連', '馬連', '馬単', 'ワイド', '3連複', '3連単'],
-      nomalFormula: ['単勝','複勝','枠連','馬連','馬単','ワイド','3連複','3連単'],
+      formula: ['枠連', '馬連', '馬単', 'ワイド', '三連複', '三連単'],
+      nomalFormula: ['単勝','複勝','枠連','馬連','馬単','ワイド','三連複','三連単'],
 
       defaultBar: {
         selectDate: null,
@@ -163,9 +163,9 @@ export default {
           combinations = boxSelectionNum * (boxSelectionNum - 1) / 2;
         } else if (this.boxDefaultCard.selectFormula == '馬単') {
           combinations = boxSelectionNum * (boxSelectionNum - 1);
-        } else if (this.boxDefaultCard.selectFormula == '3連複') {
+        } else if (this.boxDefaultCard.selectFormula == '三連複') {
           combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2) / 6;
-        } else if (this.boxDefaultCard.selectFormula == '3連単') {
+        } else if (this.boxDefaultCard.selectFormula == '三連単') {
           combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2);
         }
 
@@ -250,9 +250,9 @@ export default {
           combinations = exacta
         } else if (this.formationDefaultCard.selectFormula == 'ワイド') {
           combinations = quinella
-        } else if (this.formationDefaultCard.selectFormula == '3連複') {
+        } else if (this.formationDefaultCard.selectFormula == '三連複') {
           combinations = trio
-        } else if (this.formationDefaultCard.selectFormula == '3連単') {
+        } else if (this.formationDefaultCard.selectFormula == '三連単') {
           combinations = trifecta
         }
 
@@ -292,8 +292,8 @@ export default {
           && this.normalSelection1[0] != this.normalSelection2[0]) {
 
           combinations = 1;
-        } else if ((this.normalDefaultCard.selectFormula == '3連複'
-          || this.normalDefaultCard.selectFormula == '3連単')
+        } else if ((this.normalDefaultCard.selectFormula == '三連複'
+          || this.normalDefaultCard.selectFormula == '三連単')
           && this.normalSelection1[0]
           && this.normalSelection2[0]
           && this.normalSelection3[0]
@@ -428,8 +428,8 @@ export default {
             || this.formationDefaultCard.selectFormula == '馬単'
             || this.formationDefaultCard.selectFormula == 'ワイド') {
             param.horceSelection2 = this.boxSelection2;
-          } else if (this.formationDefaultCard.selectFormula == '3連複'
-            || this.formationDefaultCard.selectFormula == '3連単') {
+          } else if (this.formationDefaultCard.selectFormula == '三連複'
+            || this.formationDefaultCard.selectFormula == '三連単') {
             param.horceSelection2 = this.formationSelection2;
             param.horceSelection3 = this.formationSelection3;
           }
@@ -447,8 +447,8 @@ export default {
             || this.normalDefaultCard.selectFormula == '馬単'
             || this.normalDefaultCard.selectFormula == 'ワイド') {
             param.horceSelection2 = this.normalSelection2;
-          } else if (this.normalDefaultCard.selectFormula == '3連複'
-            || this.normalDefaultCard.selectFormula == '3連単') {
+          } else if (this.normalDefaultCard.selectFormula == '三連複'
+            || this.normalDefaultCard.selectFormula == '三連単') {
             param.horceSelection2 = this.normalSelection2;
             param.horceSelection3 = this.normalSelection3;
           }
@@ -460,7 +460,7 @@ export default {
         }
 
         try {
-          const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/saveRaceInfo", param);
+          const result = await axios.post("http://localhost:3000/saveRaceInfo", param);
           if (result.data === "OK") {
             // 保存に成功した場合
             alert("正常に保存できました");
@@ -529,8 +529,8 @@ export default {
         || this.formationDefaultCard.selectFormula == 'ワイド') {
         this.formationSelection3Show = false;
         this.formationSelection3 = []
-      } else if (this.formationDefaultCard.selectFormula == '3連複'
-        || this.formationDefaultCard.selectFormula == '3連単') {
+      } else if (this.formationDefaultCard.selectFormula == '三連複'
+        || this.formationDefaultCard.selectFormula == '三連単') {
         this.formationSelection3Show = true;
       }
     },
@@ -550,8 +550,8 @@ export default {
         this.normalSelection2Show = true;
         this.normalSelection3Show = false;        
         this.normalSelection3 = []
-      } else if (this.normalDefaultCard.selectFormula == '3連複'
-        || this.normalDefaultCard.selectFormula == '3連単') {
+      } else if (this.normalDefaultCard.selectFormula == '三連複'
+        || this.normalDefaultCard.selectFormula == '三連単') {
         this.normalSelection2Show = true;
         this.normalSelection3Show = true;
       }
@@ -569,7 +569,7 @@ export default {
       };
 
       try {
-        let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfo", param);
+        let result = await axios.post("http://localhost:3000/getRaceInfo", param);
         let raceInfo = result.data;
         console.log(raceInfo);
         if (raceInfo !== 'NG') {
@@ -589,8 +589,8 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.boxSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.boxSelection2 = raceInfo.horseSelection2;
               this.boxSelection3 = raceInfo.horseSelection3;
             }
@@ -610,8 +610,8 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.formationSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.formationSelection2 = raceInfo.horseSelection2;
               this.formationSelection3 = raceInfo.horseSelection3;
             }
@@ -630,8 +630,8 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.normalSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.normalSelection2 = raceInfo.horseSelection2;
               this.normalSelection3 = raceInfo.horseSelection3;
             }
