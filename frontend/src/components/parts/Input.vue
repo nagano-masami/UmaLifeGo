@@ -97,8 +97,8 @@ export default {
       sizes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
       show1: true,
       show2: true,
-      formula: ['枠連', '馬連', '馬単', 'ワイド', '3連複', '3連単'],
-      nomalFormula: ['単勝','複勝','枠連','馬連','馬単','ワイド','3連複','3連単'],
+      formula: ['枠連', '馬連', '馬単', 'ワイド', '三連複', '三連単'],
+      nomalFormula: ['単勝','複勝','枠連','馬連','馬単','ワイド','三連複','三連単'],
 
       defaultBar: {
         selectDate: null,
@@ -113,7 +113,7 @@ export default {
       boxDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null }
+        selectUnit: null
       },
 
 
@@ -123,7 +123,7 @@ export default {
       formationDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null },
+        selectUnit: null,
       },
       formationSelection3Show: true,
 
@@ -135,7 +135,7 @@ export default {
       normalDefaultCard: {
         selectFormula: null,
         selectAmount: null,
-        selectUnit: { text: null, digit: null },
+        selectUnit: null,
       },
       normalSelection2Show: true,
       normalSelection3Show: true,
@@ -163,9 +163,9 @@ export default {
           combinations = boxSelectionNum * (boxSelectionNum - 1) / 2;
         } else if (this.boxDefaultCard.selectFormula == '馬単') {
           combinations = boxSelectionNum * (boxSelectionNum - 1);
-        } else if (this.boxDefaultCard.selectFormula == '3連複') {
+        } else if (this.boxDefaultCard.selectFormula == '三連複') {
           combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2) / 6;
-        } else if (this.boxDefaultCard.selectFormula == '3連単') {
+        } else if (this.boxDefaultCard.selectFormula == '三連単') {
           combinations = boxSelectionNum * (boxSelectionNum - 1) * (boxSelectionNum - 2);
         }
 
@@ -250,9 +250,9 @@ export default {
           combinations = exacta
         } else if (this.formationDefaultCard.selectFormula == 'ワイド') {
           combinations = quinella
-        } else if (this.formationDefaultCard.selectFormula == '3連複') {
+        } else if (this.formationDefaultCard.selectFormula == '三連複') {
           combinations = trio
-        } else if (this.formationDefaultCard.selectFormula == '3連単') {
+        } else if (this.formationDefaultCard.selectFormula == '三連単') {
           combinations = trifecta
         }
 
@@ -292,8 +292,8 @@ export default {
           && this.normalSelection1[0] != this.normalSelection2[0]) {
 
           combinations = 1;
-        } else if ((this.normalDefaultCard.selectFormula == '3連複'
-          || this.normalDefaultCard.selectFormula == '3連単')
+        } else if ((this.normalDefaultCard.selectFormula == '三連複'
+          || this.normalDefaultCard.selectFormula == '三連単')
           && this.normalSelection1[0]
           && this.normalSelection2[0]
           && this.normalSelection3[0]
@@ -428,8 +428,8 @@ export default {
             || this.formationDefaultCard.selectFormula == '馬単'
             || this.formationDefaultCard.selectFormula == 'ワイド') {
             param.horceSelection2 = this.boxSelection2;
-          } else if (this.formationDefaultCard.selectFormula == '3連複'
-            || this.formationDefaultCard.selectFormula == '3連単') {
+          } else if (this.formationDefaultCard.selectFormula == '三連複'
+            || this.formationDefaultCard.selectFormula == '三連単') {
             param.horceSelection2 = this.formationSelection2;
             param.horceSelection3 = this.formationSelection3;
           }
@@ -447,8 +447,8 @@ export default {
             || this.normalDefaultCard.selectFormula == '馬単'
             || this.normalDefaultCard.selectFormula == 'ワイド') {
             param.horceSelection2 = this.normalSelection2;
-          } else if (this.normalDefaultCard.selectFormula == '3連複'
-            || this.normalDefaultCard.selectFormula == '3連単') {
+          } else if (this.normalDefaultCard.selectFormula == '三連複'
+            || this.normalDefaultCard.selectFormula == '三連単') {
             param.horceSelection2 = this.normalSelection2;
             param.horceSelection3 = this.normalSelection3;
           }
@@ -492,7 +492,7 @@ export default {
           this.boxDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null }
+            selectUnit: null
           }
       }
       if (this.tab == "tab-2") {
@@ -502,7 +502,7 @@ export default {
           this.formationDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null },
+            selectUnit: null,
           }
       }
       if (this.tab == "tab-3") {
@@ -512,7 +512,7 @@ export default {
           this.normalDefaultCard = {
             selectFormula: null,
             selectAmount: null,
-            selectUnit: { text: null, digit: null },
+            selectUnit: null,
           }
       }
 
@@ -529,8 +529,8 @@ export default {
         || this.formationDefaultCard.selectFormula == 'ワイド') {
         this.formationSelection3Show = false;
         this.formationSelection3 = []
-      } else if (this.formationDefaultCard.selectFormula == '3連複'
-        || this.formationDefaultCard.selectFormula == '3連単') {
+      } else if (this.formationDefaultCard.selectFormula == '三連複'
+        || this.formationDefaultCard.selectFormula == '三連単') {
         this.formationSelection3Show = true;
       }
     },
@@ -550,8 +550,8 @@ export default {
         this.normalSelection2Show = true;
         this.normalSelection3Show = false;        
         this.normalSelection3 = []
-      } else if (this.normalDefaultCard.selectFormula == '3連複'
-        || this.normalDefaultCard.selectFormula == '3連単') {
+      } else if (this.normalDefaultCard.selectFormula == '三連複'
+        || this.normalDefaultCard.selectFormula == '三連単') {
         this.normalSelection2Show = true;
         this.normalSelection3Show = true;
       }
@@ -589,15 +589,14 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.boxSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.boxSelection2 = raceInfo.horseSelection2;
               this.boxSelection3 = raceInfo.horseSelection3;
             }
             this.boxDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.boxDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.boxDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.boxDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
+            this.boxDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
 
           }
@@ -610,15 +609,14 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.formationSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.formationSelection2 = raceInfo.horseSelection2;
               this.formationSelection3 = raceInfo.horseSelection3;
             }
             this.formationDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.formationDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.formationDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.formationDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
+            this.formationDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
           }
           if (raceInfo.ticket_category_name == "通常") {
@@ -630,16 +628,14 @@ export default {
               || raceInfo.ticket_selection_j_name == '馬単'
               || raceInfo.ticket_selection_j_name == 'ワイド') {
               this.normalSelection2 = raceInfo.horseSelection2;
-            } else if (raceInfo.ticket_selection_j_name == '3連複'
-              || raceInfo.ticket_selection_j_name == '3連単') {
+            } else if (raceInfo.ticket_selection_j_name == '三連複'
+              || raceInfo.ticket_selection_j_name == '三連単') {
               this.normalSelection2 = raceInfo.horseSelection2;
               this.normalSelection3 = raceInfo.horseSelection3;
             }
             this.normalDefaultCard.selectFormula = raceInfo.ticket_selection_j_name;
             this.normalDefaultCard.selectAmount = raceInfo.purchase_amount;
-            this.normalDefaultCard.selectUnit.text = raceInfo.amount_unit_j_name;
-            this.normalDefaultCard.selectUnit.digit = raceInfo.amount_unit_number_j_name;
-
+            this.normalDefaultCard.selectUnit = { text: raceInfo.amount_unit_j_name, digit: raceInfo.amount_unit_number_j_name };
 
           }
 
