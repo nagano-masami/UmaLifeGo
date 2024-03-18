@@ -31,7 +31,7 @@
             hide-details
             class="pa-0"
             overflow
-            v-model="defaultCard.selectUnit"
+            v-model="defaultCard.selectUnit.text"
             @input="updatedData"
             item-value="digit"
             
