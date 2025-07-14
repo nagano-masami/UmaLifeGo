@@ -444,7 +444,7 @@ export default {
         }
 
         try {
-          const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/saveRaceInfo", param);
+          const result = await axios.post("https://umalifegobackend.onrender.com/saveRaceInfo", param);
           if (result.data === "OK") {
             // 保存に成功した場合
             alert("正常に保存できました");
@@ -553,7 +553,7 @@ export default {
       };
 
       try {
-        let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfo", param);
+        let result = await axios.post("https://umalifegobackend.onrender.com/getRaceInfo", param);
         let raceInfo = result.data;
         console.log(raceInfo);
         if (raceInfo !== 'NG') {

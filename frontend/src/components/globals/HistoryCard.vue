@@ -79,7 +79,7 @@ export default {
 
         try {
           const result = await axios.post(
-            "http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/deleteRaceInfo",
+            "https://umalifegobackend.onrender.com/deleteRaceInfo",
             param
           );
           if (result.data === "OK") {

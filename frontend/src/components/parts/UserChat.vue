@@ -77,7 +77,7 @@ export default {
     // 投稿したチャットの削除
     async deleteRecord() {
       try {
-        const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/delete");
+        const result = await axios.post("https://umalifegobackend.onrender.com/delete");
         if (result.data === "OK") {
           // 削除に成功した場合履歴の初期化
           this.messages = [];
@@ -96,7 +96,7 @@ export default {
 
     // 初期表示時にDBのレコードを取得する
     try {
-      const result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getHistories");
+      const result = await axios.post("https://umalifegobackend.onrender.com/getHistories");
       if (result.data !== "NG") {
         // 履歴の取得に成功した場合
         this.messages = result.data;

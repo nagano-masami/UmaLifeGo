@@ -112,7 +112,7 @@ export default {
         };
 
         try {
-          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfos", param);
+          let result = await axios.post("https://umalifegobackend.onrender.com/getRaceInfos", param);
           if (result.data !== "NG") {
             // historyの取得に成功した場合
             this.raceInfoDistinguish(result.data);
@@ -139,7 +139,7 @@ export default {
         };
 
         try {
-          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getRaceInfos", param);
+          let result = await axios.post("https://umalifegobackend.onrender.com/getRaceInfos", param);
           let resultData = result.data;
           console.log(resultData);
           if (resultData !== "NG") {
@@ -160,7 +160,7 @@ export default {
           const param = {
             id: this.$store.state.id
           };
-          let result = await axios.post("http://UmaLifeGo-ALB-2064613329.ap-northeast-1.elb.amazonaws.com:3000/getInitInfo", param);
+          let result = await axios.post("https://umalifegobackend.onrender.com/getInitInfo", param);
           let resultData = result.data;
           if (resultData !== "NG") {
             // 履歴の取得に成功した場合
